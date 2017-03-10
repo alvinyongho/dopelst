@@ -18,6 +18,9 @@ export default {
       isLogin: false,
     };
   },
+  created() {
+    this.isLogin = this.$route.path === '/login';
+  },
   watch: {
     $route(to) { // (to,from)
       this.isLogin = to.path === '/login';
