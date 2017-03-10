@@ -2,8 +2,9 @@
   <div id="app">
     <nav>
       <router-link to="/">HOME</router-link><!--
-      --><router-link to="/foo" class="nav-link">FOO</router-link><!--
-      --><router-link to="/bar" class="nav-link">BAR</router-link>
+      --><router-link to="/login" class="nav-link" v-bind:style="{ display: isLogin ? 'none' : '' }">LOGOUT</router-link><!--
+      --><router-link to="/bar" class="nav-link">BAR</router-link><!--
+      --><router-link to="/foo" class="nav-link">FOO</router-link>
     </nav>
     <router-view></router-view>
   </div>
@@ -12,6 +13,16 @@
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      isLogin: false,
+    };
+  },
+  watch: {
+    $route(to) { // (to,from)
+      this.isLogin = to.path === '/login';
+    },
+  },
 };
 </script>
 
@@ -27,6 +38,8 @@ body, html {
 
 <style scoped>
 nav {
+  z-index: 9999;
+
   background-color: #000;
 }
 
