@@ -9,9 +9,9 @@ module.exports = function(grunt) {
         force: true
       },
       build:   ['<%= pkg.build %>/*'],
-      cssdist: ['<%= pkg.hw5vuedist %>/css'],
-      imgdist: ['<%= pkg.hw5vuedist %>/img'],
-      jsdist:  ['<%= pkg.hw5vuedist %>/js']
+      cssdist: ['<%= pkg.hw5dist %>/css'],
+      imgdist: ['<%= pkg.hw5dist %>/img'],
+      jsdist:  ['<%= pkg.hw5dist %>/js']
     },
 
     /* HTML Minify */
@@ -34,9 +34,9 @@ module.exports = function(grunt) {
       hw5vue: {
         files: [{
           expand: true,
-          cwd: '<%= pkg.dev %>/html/vue',
+          cwd: '<%= pkg.html %>',
           src: ['**/*.html'],
-          dest: '<%= pkg.hw5vuedist %>'
+          dest: '<%= pkg.hw5dist %>'
         }]
       }
     },
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
         components: {
             files: [{
                     expand: true,
-                    src: '<%= pkg.js %>/vue/components/**/*.vue',
+                    src: '<%= pkg.js %>/components/**/*.vue',
                     dest: '<%= pkg.build %>/js/vueout',
                     ext: '.vue.js'
                 }
@@ -61,13 +61,13 @@ module.exports = function(grunt) {
 
       hw5vue: {
         files: {
-          '<%= pkg.hw5vuedist %>/js/output.min.js': ['<%= pkg.js %>/vue/vue.js', '<%= pkg.js %>/vue/vue-router.js'  , '<%= pkg.js %>/vue/vuefire.js', '<%= pkg.js %>/vue/config.js', '<%= pkg.build %>/js/vueout/**/*.js']
+          '<%= pkg.hw5dist %>/js/dopelst.min.js': ['<%= pkg.js %>/vue.js', '<%= pkg.js %>/vue-router.js'  , '<%= pkg.js %>/vuefire.js', '<%= pkg.js %>/config.js', '<%= pkg.js %>/*.js', '<%= pkg.build %>/js/vueout/**/*.js']
         }
       },
 
       // vuefiles: {
       //   files: {
-      //     '<%= pkg.hw5vuedist %>/js/vue.min.js': ['<%= pkg.build %>/js/vueout/**/*.js']
+      //     '<%= pkg.hw5dist %>/js/vue.min.js': ['<%= pkg.build %>/js/vueout/**/*.js']
       //   }
       // },
 
@@ -135,7 +135,7 @@ module.exports = function(grunt) {
       },
       hw5: {
         files: {
-          '<%= pkg.hw5vuedist %>/css/main.min.css': ['<%= pkg.build %>/css/minifyout/main.min.css']
+          '<%= pkg.hw5dist %>/css/main.min.css': ['<%= pkg.build %>/css/minifyout/main.min.css']
         }
       }
     },
@@ -148,7 +148,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= pkg.img %>',
           src: ['**/*.{png,jpg,gif,svg}'],
-          dest: '<%= pkg.hw5vuedist %>/img'
+          dest: '<%= pkg.hw5dist %>/img'
         }]
       }
     },
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
     /* Watch */
     watch: {
       html: {
-        files: '<%= pkg.dev %>/**',
+        files: '<%= pkg.html %>/**',
         tasks: 'html'
       },
       css: {
@@ -190,7 +190,7 @@ module.exports = function(grunt) {
         tasks: 'css'
       },
       js: {
-        files: '<%= pkg.js %>/**/*.js',
+        files: '<%= pkg.js %>/**/*.{js,vue}',
         tasks: 'js'
       },
       img: {

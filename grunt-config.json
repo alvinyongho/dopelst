@@ -1,8 +1,8 @@
 {
   "build": "build",
-  "hw5vanilladist": "finalproject/vanilla/public",
-  "hw5vuedist": "finalproject/vue/public",
+  "hw5dist": "firebase/public",
   "dev": "hw5dev",
+  "html": "hw5dev/html",
   "css": "hw5dev/css",
   "js":  "hw5dev/js",
   "img": "hw5dev/img"

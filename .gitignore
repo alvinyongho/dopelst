@@ -1,0 +1,6 @@
+.DS_store
+*.codekit
+
+node_modules
+.sass-cache
+firebase-debug.log
