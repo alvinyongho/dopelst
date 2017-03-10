@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">HOME</router-link><!--
-      --><router-link to="/login" class="nav-link" v-bind:style="{ display: isLogin ? 'none' : '' }">LOGOUT</router-link><!--
-      --><router-link to="/bar" class="nav-link">BAR</router-link><!--
-      --><router-link to="/foo" class="nav-link">FOO</router-link>
+      <router-link to="/">HOME</router-link>
+      <router-link to="/login" class="nav-link" v-bind:style="{ display: isLogin ? 'none' : '' }">LOGOUT</router-link>
+      <router-link to="/bar" class="nav-link">BAR</router-link>
+      <router-link to="/foo" class="nav-link">FOO</router-link>
     </nav>
     <router-view></router-view>
   </div>
