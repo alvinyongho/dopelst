@@ -18,12 +18,18 @@ export default {
       isLogin: false,
     };
   },
+  methods: {
+    syncRoute(path) {
+      this.isLogin = (path === '/login');
+      window.document.title = path;
+    },
+  },
   created() {
-    this.isLogin = this.$route.path === '/login';
+    this.syncRoute(this.$route.path);
   },
   watch: {
     $route(to) { // (to,from)
-      this.isLogin = to.path === '/login';
+      this.syncRoute(to.path);
     },
   },
 };

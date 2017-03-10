@@ -7,7 +7,7 @@ import Bar from '@/components/Bar';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -31,3 +31,12 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  next();
+
+  /* Can redirect not logged in users here */
+  // next('/');
+});
+
+export default router;
