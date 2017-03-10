@@ -31,7 +31,10 @@ export default {
   name: 'hello',
   data() {
     return {
-      msg: 'Welcome to Your Login App',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      wantsToSignUp: false,
     };
   },
 };
