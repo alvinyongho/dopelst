@@ -1,0 +1,80 @@
+#back {
+  button a {
+    color: #000;
+  }
+}
+
+#addplaylist-button{
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  border: none;
+  /*border: 1px solid #6039E2;*/
+  font-size: .75em;
+  padding: 5px;
+  margin-top:10px;
+  border-bottom: 1px solid #6039E2;
+}
+#edit-button{
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  border: none;
+  /*border: 1px solid #6039E2;*/
+  font-size: .75em;
+  padding: 5px;
+  margin-top:10px;
+  border-bottom: 1px solid #6039E2;
+}
+
+
+.song-text{
+  text-align: center;
+  margin:0;
+  margin-top: 50px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: normal;
+
+
+
+  #song-title{
+    font-size: 2em;
+    margin-bottom: 8px;
+    /*font-weight: 300;*/
+  }
+  #song-artist{
+    font-size: 2em;
+    margin-bottom: 8px;
+    /*font-weight: 200;*/
+  }
+  #song-length{
+    font-size: 1em;
+    margin-bottom: 30px;
+    font-weight: 200;
+  }
+  #song-tags{
+    font-size: .75em;
+    margin-top: 15px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+
+}
+
+#song-link{
+  margin: 20px;
+  button{
+    display: block;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #6039E2;
+    font-size: 1em;
+    padding: 10px;
+    a{
+      text-decoration: none;
+      color: #6039E2;
+    }
+  }
+}

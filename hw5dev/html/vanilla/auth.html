@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Demo</title>
+    <!-- CSS Page? -->
+</head>
+<body>
+    <nav>
+    <a href="/">Back to Index</a>
+    </nav>
+    <header>
+    <h1>Authentication Demo</h1>
+    </header>
+    <section class="demo">
+        <!-- Noauth View -->
+        <div id="noauth" style="display:none">
+            <input type="radio" id="signInSelector" name="signInOrSignUp" value="signin" checked />
+            <label for="signIn">Sign In</label>
+            <input type="radio" id="signUpSelector" name="signInOrSignUp" value="signup" />
+            <label for="signUp">Sign Up</label>
+
+            <!-- Signin View -->
+            <div id="signin" style="display:none">
+                <p>Sign in with Email/Password</p>
+                <form id="signinForm">
+                    <label for="signinEmail">Email</label>
+                    <br />
+                    <input type="text" id="signinEmail" name="signinEmail" />
+                    <br />
+                    <label for="signinPassword">Password</label>
+                    <br />
+                    <input type="password" id="signinPassword" name="signinPassword" />
+                    <br />
+                    <input type="submit" id="signinSubmit" name="signInEmailPassword" value="Sign In" />
+                </form>
+                <p>Or sign in with your Google account</p>
+                <input type="submit" id="signinGoogle" name="signInGoogle" value="Google" />
+                </div><!-- #signin -->
+            <!-- Signup View -->
+            <div id="signup" style="display:none">
+                <p>Sign up with Email/Password</p>
+                <form id="signupForm">
+                    <label for="signupEmail">Email</label>
+                    <br />
+                    <input type="text" id="signupEmail" name="signupEmail" />
+                    <br />
+                    <label for="signupPassword">Password</label>
+                    <br />
+                    <input type="password" id="signupPassword" name="signupPassword" />
+                    <br />
+                    <input type="submit" id="signupSubmit" name="signUp" value="Sign Up" />
+                </form>
+            </div><!-- #signup -->
+        </div><!-- #noauth -->
+        <!-- Auth View -->
+        <div id="auth" style="display:none">
+            <input type="submit" id="signout" name="signout" value="Sign Out" />
+        </div><!-- #auth -->
+    </section>
+
+    <!-- Firebase Include -->
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+    <script type="text/javascript">
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyC-zzCf0j4SFZAN168mk18NmnMCvWLHFsM",
+            authDomain: "dopelstvanilla.firebaseapp.com",
+            databaseURL: "https://dopelstvanilla.firebaseio.com",
+            storageBucket: "dopelstvanilla.appspot.com",
+            messagingSenderId: "477230621626"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!-- End Firebase Include -->
+    <script src="/js/auth.min.js"></script>
+</body>
+</html>

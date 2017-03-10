@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title> Login page </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Muli" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.min.css" />
+</head>
+
+<body>
+
+	<header>
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li class = "nav-link"><a href="logout.html">LOGOUT</a></li>
+        <li class = "nav-link"><a href="faq.html">FAQ</a></li>
+        <li class = "nav-link"><a href="team.html">TEAM</a></li>
+    </ul>
+  </header>
+
+
+
+  <div class="login-form">
+    <div class="logo overlap">
+      <img src="/img/ucsd-edition.png" alt="ucsd" >
+    </div>
+
+    <div id="login-form-container">
+      <h4>Login to account</h4>
+      <form id="login-form" v-on:submit.prevent="doLogin">
+        <input v-model="user.email" type="text" name="email" placeholder="Email"><br>
+        <input v-model="user.password" type="password" name="password" placeholder="Password"><br>
+
+        <div class="btn-wrapper">
+          <input type="submit" value="Login">
+        </div>
+        <p id="errmsg"> </div>
+      </form>
+      <button id="register-link" onclick="location.href='/email-register.html'">Register</button>
+
+    </div>
+
+  </div> <!-- /register form -->
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+<script src="js/output.min.js"></script>
+<script src="js/email-login.min.js"></script>
+
+
+<!--  Would it preferable to do sign out in routes file? -->
+<script>
+firebase.auth().signOut().then(function() {
+  console.log("Signed out")
+}, function(error) {
+  // An error happened.
+  console.log("An error happened")
+  console.log(error)
+});
+</script>
+
+
+</html>

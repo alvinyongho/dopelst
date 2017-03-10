@@ -1,0 +1,77 @@
+@import 'bourbon/bourbon';
+
+@mixin v-center {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+/* share body elements */
+#share-container {
+	height: 100%;
+	background: rgba(43,22,164,1);/* Old Browsers */
+	background: -moz-linear-gradient(-45deg, rgba(43,22,164,1) 0%, rgba(198,104,217,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(43,22,164,1)), color-stop(100%, rgba(198,104,217,1)));/* Chrome, Safari4+ */
+	background: -webkit-linear-gradient(-45deg, rgba(43,22,164,1) 0%, rgba(198,104,217,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg, rgba(43,22,164,1) 0%, rgba(198,104,217,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg, rgba(43,22,164,1) 0%, rgba(198,104,217,1) 100%); /* IE 10+ */
+	background: linear-gradient(135deg, rgba(43,22,164,1) 0%, rgba(198,104,217,1) 100%);/* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b16a4', endColorstr='#c668d9', GradientType=1 );/* IE6-9 fallback on horizontal gradient */
+}
+
+#share-wrapper {
+	background-color: #F1F1F1;
+	display: block;
+	margin: 0 auto;
+	width: 60%;
+	@include v-center;
+}
+
+#share-wrapper>a {
+	float: right;
+	text-decoration: none;
+	padding-right: 1.25em;
+}
+
+#share-wrapper h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1em;
+	text-align: center;
+}
+
+#share-text-wrapper {
+	padding: 20px 0;
+}
+
+#share-info {
+	display: block;
+	margin: 0 auto;
+	width: 60%;
+}
+
+#share-info p {
+	font-family: 'Muli', sans-serif;
+	color: #9F9F9F;
+	text-align: center;
+}
+
+#share-song-title, #share-by, #share-song-artist {
+	display: inline-block;
+}
+
+#share-by {
+	padding: 0 5px;
+}
+
+#share-url {
+	display: block;
+	margin: 0 auto;
+	width: 60%;
+}
+
+#share-url textarea{
+	width: 100%;
+	font-family: 'Muli', sans-serif;
+	font-size: 0.75em;
+	color: #2B2B2B;
+
+}

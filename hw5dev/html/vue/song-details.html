@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Song details</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Muli" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.min.css" />
+
+</head>
+
+<body>
+
+
+	<header>
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li class = "nav-link"><a href="logout.html">LOGOUT</a></li>
+        <li class = "nav-link"><a href="faq.html">FAQ</a></li>
+        <li class = "nav-link"><a href="team.html">TEAM</a></li>
+    </ul>
+  </header>
+
+
+<div class="splash-bg">
+  <div id="back">
+    <button> <a href="/playlist.html">BACK TO PLAYLIST </a></button>
+  </div>
+
+</div>
+
+
+
+
+<div class="container-body" id="add">
+	<!-- <h2>Get Schwifty</h2> -->
+	<!-- <hr> -->
+
+
+
+	<div class="song-wrapper">
+		<div id="album-image"><img src="img/song-album.png" alt="Image of Song's Album" /></div><!-- #album -->
+
+		<div class="details-toolbox">
+			<div id="edit">
+				<button id="edit-button" onclick="location.href='/edit.html'">Edit</button>
+			</div>
+			<div id="add-playlist">
+				<button id="addplaylist-button" onclick="location.href='/playlist.html'">Add To Playlist</button>
+			</div>
+		</div>
+
+		<div class="song-text">
+			<div id="song-title">Get Schwifty</div><!-- #song-title -->
+			<div id="song-artist">R&M</div><!-- #song-artist -->
+			<div id="song-length">4:20</div>
+			<div id="song-tags">#Dats good</div>
+			<div id="song-link">
+				<button type="button">
+					<a href="https://play.spotify.com/user/124462244/playlist/5KHCOtgFSOhxhH5W5e1UPc?play=true&utm_source=open.spotify.com&utm_medium=open">Listen on Spotify</a>
+				</button>
+			</div><!-- #song-link -->
+		</div><!-- .song-text -->
+	</div><!-- .song-wrapper -->
+</div><!-- .container-body -->
+<script src="js/auth-check.min.js"></script>
+</body>
+
+</html>

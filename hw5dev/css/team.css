@@ -1,0 +1,85 @@
+#team-margin{
+  margin: 20px;
+}
+
+
+.cool-header{
+
+}
+
+
+#team-body{
+
+}
+
+
+.quickbar{
+  position: fixed;
+  bottom: 70px;
+  left: 0px;
+  width: 100px;
+  /*height: 300px;*/
+  background-color: black;
+
+  a{
+    display: block;
+    color: white;
+    margin: 5px;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 200;
+  }
+
+}
+
+
+.team-members{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 50%;
+  height: 20.75em;
+  background-color: #EDEDED;
+
+  margin-top: 180px;
+  margin-bottom: 100px;
+  border: 1px solid #F5F5F5;
+
+  border-radius: 10px;
+
+
+}
+
+.team-member{
+  h2 {
+    padding-top:5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    text-align: center;
+
+  }
+}
+
+.team-member img{
+  display: block;
+  margin: 0 auto;
+
+  margin-top: -50px;
+  /* Lauren Liu Goals: I: */
+
+  /* Rectangle: */
+  /* Rectangle: */
+  /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);*/
+  /* Path 2: */
+}
+
+.team-description{
+  padding-top: 15px;
+
+  p {
+    font-size: 1em;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    padding: 5px;
+  }
+}

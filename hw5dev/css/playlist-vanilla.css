@@ -1,0 +1,111 @@
+@import 'bourbon/bourbon';
+
+@mixin v-center {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+#playlist-wrapper {
+	min-height: 100%;
+}
+
+#playlist-banner {
+	height: 40%;
+	background: #0e0a0a;
+	background: -webkit-linear-gradient(left, #0e0a0a, #65151e);
+	background: -moz-linear-gradient(left, #0e0a0a, #65151e);
+	background: -ms-linear-gradient(left, #0e0a0a, #65151e);
+	background: -o-linear-gradient(left, #0e0a0a, #65151e);
+	background: linear-gradient(to right, #0e0a0a, #65151e);
+}
+
+#playlist-banner h1, #playlist-banner h4, #playlist-banner p{
+	margin: 0 0 0 10%;
+	@include v-center;
+}
+
+#playlist-banner h1 {
+	font-family: 'Muli', sans-serif;
+	color: #fff;
+	font-size: 1.75em;
+}
+
+#playlist-banner h4 {
+	font-family: 'Muli', sans-serif;
+	color: #fff;
+	font-size: 1em;
+}
+
+#playlist-banner>p {
+	font-family: 'Muli', sans-serif;
+	color: #cdcdcd;
+	font-size: 0.75em;
+}
+
+#playlist-album-img {
+	height: 230px;
+	width: 230px;
+	position: absolute;
+	margin: 0;
+	top: 20%;
+	right: 10%;
+	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+#playlist-album-img img{
+	height: 100%;
+	width: 100%;
+}
+
+
+@media screen and (max-width: 1056px) {
+
+  #playlist-album-img {
+  	height: 316px;
+  	width: 316px;
+  	position: absolute;
+  	margin: 0;
+    visibility: hidden;
+    margin-top: 100px;
+  	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+  }
+
+
+  #playlist-album-img img{
+  	height: 100%;
+  	width: 100%;
+    visibility: hidden;
+  }
+
+  #playlist-body{
+    visibility: hidden;
+    position: absolute;
+  }
+
+
+}
+
+
+
+#playlist-body {
+	margin: 2% 10%;
+	width: 50%;
+}
+
+#playlist-body p {
+	font-family: 'Muli', sans-serif;
+	font-size: 0.75em;
+	font-weight: 200;
+}
+
+#playlist-album-img{
+  label {
+    margin: 0;
+    font-size: .75em;
+
+  }
+  input {
+
+  }
+}
