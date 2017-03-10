@@ -1,22 +1,28 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div class="loginpage">
+    <form class="auth-form" v-on:submit.prevent="wantsToSignUp ? signUpWithPassword() : signInWithPassword()">
+      <h1>{{wantsToSignUp ? 'Sign up' : 'Login'}}</h1>
+      <div>
+        <input type="email" name="email" id="email" placeholder="Email" required v-model="email">
+      </div>
+      <div>
+        <input type="password" name="password" id="password" placeholder="Password" required v-model="password">
+      </div>
+      <div v-show="wantsToSignUp">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" name="confirm-password" id="confirm-password" v-model="confirmPassword">
+      </div>
+      <div v-show="!wantsToSignUp" class="clearfix btn-group">
+        <button type="submit" class="signup-submit">Sign in</button><br>
+        <button type="button" class="signup-button" v-on:click="wantsToSignUp = true">Don't have an account? <b> Sign up </b></button>
+      </div>
+      <div v-show="wantsToSignUp">
+        <button type="submit" class="signup-submit">Sign up</button><br>
+        <button type="button" class="signin-button" v-on:click="wantsToSignUp = false">Already have account</button>
+
+      </div>
+    </form>
+
   </div>
 </template>
 
@@ -33,21 +39,112 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+  h1{
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+    margin-bottom: 5vh;
+    font-weight: lighter;
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  }
 
-a {
-  color: #42b983;
-}
+  #loginpage{
+    background: #092756;
+    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top, rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg, #670d10 0%,#092756 100%);
+    height: 100vh;
+    padding-top: 25px;
+    /*margin-bottom: 50px;*/
+
+  }
+
+  #login-form-container{
+    position: fixed;
+    width: 420px;
+    max-width: 100%;
+    top: 20vh;
+    /*left: 50vw;*/
+    /*margin: 25vh auto 15px;*/
+    background-color: #fff;
+    height: 50px;
+  }
+
+  label{
+
+  }
+
+  input{
+    /*border:1px solid rgba(94,126,184,0.50);*/
+    border: none;
+    /* Rectangle 2: */
+    /*margin-top: px;*/
+    margin-bottom: 10px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 0 0 #339DFF;
+    height: 35px;
+    width: 290px;
+    font-size: 1.55em;
+    padding-left: 10px;
+  }
+
+
+  .auth-form{
+
+    width: 300px;
+    top: 25vh;
+    /*left: 50vw;*/
+    margin: 0 auto;
+    background-color: #F5F5F5;
+    padding: 15px;
+    margin-top: 50px;
+
+  }
+
+  button{
+    margin-top: 0px;
+    height: 35px;
+    font-size: 1.15em;
+    /*width: 120px;*/
+
+    /*background: #DF1F17;*/
+    border: none;
+    margin-bottom: 25px;
+    /*color: white;*/
+    /*box-shadow: 0 1px 0 0 rgba(94,126,184,0.50);*/
+
+  }
+  .signup-submit{
+    color: #336EFF;
+    margin-top: 25px;
+    /*color: white;*/
+    background: none;
+
+  }
+  .signin-submit{
+    /* Rectangle 5: */
+    color: #336EFF;
+    margin-top: 25px;
+    /*color: white;*/
+    background: none;
+
+  }
+
+  .signup-button{
+    color: #37BBA2;
+    /*color: white;*/
+    font-size: .8em;
+    background: none;
+
+
+  }
+  .signin-button{
+    /* Rectangle 5: */
+    color: #37BBA2;
+    font-size: .8em;
+    /*color: white;*/
+    background: none;
+
+  }
+
 </style>
