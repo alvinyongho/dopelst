@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">HOME</router-link>
-      <div class="nav-link" v-bind:style="{ display: isLogin ? 'none' : '' }" v-on:click="logoutUser">LOGOUT</div>
-      <router-link to="/bar" class="nav-link">BAR</router-link>
-      <router-link to="/foo" class="nav-link">FOO</router-link>
+      <router-link to="/" v-bind:style="linkStyle">HOME</router-link>
+      <div class="spacer">&nbsp;</div>
+      <div class="nav-link" v-bind:style="linkStyle" v-on:click="logoutUser">LOGOUT</div>
+      <router-link to="/bar" class="nav-link" v-bind:style="linkStyle">BAR</router-link>
+      <router-link to="/foo" class="nav-link" v-bind:style="linkStyle">FOO</router-link>
     </nav>
     <router-view></router-view>
   </div>
@@ -30,6 +31,13 @@ export default {
     return {
       isLogin: false,
     };
+  },
+  computed: {
+    linkStyle() {
+      return {
+        display: this.isLogin ? 'none' : '',
+      };
+    },
   },
   methods: {
     logoutUser() {
@@ -67,7 +75,6 @@ export default {
 body, html {
   margin: 0;
   padding: 0;
-
   width: 100%;
   height: 100%;
 
@@ -76,7 +83,16 @@ body, html {
 </style>
 
 <style scoped>
+#app {
+  height: 100%;
+}
+
 nav {
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 9999;
 
   background-color: #000;
@@ -94,5 +110,9 @@ nav a, nav div {
 
 nav .nav-link {
   float: right;
+}
+
+nav .spacer {
+  cursor: default;
 }
 </style>
