@@ -50,6 +50,9 @@ export default {
     },
   },
   created() {
+    if (!firebase.auth().currentUser) {
+      this.$router.push({ path: '/login' });
+    }
     this.syncRoute(this.$route.path);
   },
   watch: {
