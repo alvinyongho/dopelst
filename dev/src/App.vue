@@ -13,6 +13,17 @@
 <script>
 import firebase from 'firebase';
 
+// const config = {
+//   apiKey: 'AIzaSyAieH1g0trAjkHGDBbmuSV2iKPQXwTYz7Y',
+//   authDomain: 'dopelst-a697d.firebaseapp.com',
+//   databaseURL: 'https://dopelst-a697d.firebaseio.com',
+//   storageBucket: 'dopelst-a697d.appspot.com',
+//   messagingSenderId: '492354135751',
+// };
+
+// const app = firebase.initializeApp(config);
+// const db = app.database();
+
 export default {
   name: 'app',
   data() {
