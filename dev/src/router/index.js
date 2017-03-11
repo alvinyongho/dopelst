@@ -4,6 +4,7 @@ import Hello from '@/components/Hello';
 import Login from '@/components/Login';
 import Foo from '@/components/Foo';
 import Bar from '@/components/Bar';
+import Playlists from '@/components/Playlists';
 
 Vue.use(Router);
 
@@ -30,9 +31,9 @@ const router = new Router({
       component: Bar,
     },
     {
-      path: '/foo',
-      name: 'Playlist',
-      component: Foo,
+      path: '/playlists',
+      name: 'Playlists',
+      component: Playlists,
     },
   ],
 });
