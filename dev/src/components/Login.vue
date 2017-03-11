@@ -1,5 +1,8 @@
 <template>
-  <div class="loginpage">
+  <div id="loginpage">
+    <center><router-link to="/" style="color: white;">Go Back</router-link></center>
+
+
     <form class="auth-form" v-on:submit.prevent="wantsToSignUp ? signUpWithPassword() : signInWithPassword()">
       <h1>{{wantsToSignUp ? 'Sign up' : 'Login'}}</h1>
       <div>
@@ -12,6 +15,11 @@
         <label for="confirm-password">Confirm Password</label>
         <input type="password" name="confirm-password" id="confirm-password" v-model="confirmPassword">
       </div>
+
+      <div>
+        <p>{{errormsg}}</p>
+      </div>
+
       <div v-show="!wantsToSignUp" class="clearfix btn-group">
         <button type="submit" class="signup-submit">Sign in</button><br>
         <button type="button" class="signup-button" v-on:click="wantsToSignUp = true">Don't have an account? <b> Sign up </b></button>
@@ -25,22 +33,61 @@
 
   </div>
 </template>
-
 <script>
-export default {
-  name: 'hello',
-  data() {
-    return {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      wantsToSignUp: false,
-    };
-  },
-};
-</script>
+  import firebase from 'firebase';
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+  export default {
+    name: 'auth',
+    data() {
+      return {
+        email: '',
+        password: '',
+        confirmPassword: '',
+        wantsToSignUp: false,
+        errormsg: '',
+      };
+    },
+    methods: {
+      signUpWithPassword() {
+        const email = this.email;
+        const password = this.password;
+        if (this.password === this.confirmPassword) {
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(() => this.signInWithPassword())
+            .catch((error) => {
+              // const errorCode = error.code;
+              const errorMessage = error.message;
+              // console.log(errorCode + errorMessage);
+              this.errormsg = errorMessage;
+            });
+        } else {
+          this.errormsg = 'Please make sure that your passwords are matching';
+        }
+      },
+      signInWithPassword() {
+        const email = this.email;
+        const password = this.password;
+        // console.log('trying to sign in with password');
+        firebase.auth().signInWithEmailAndPassword(email, password)
+          .then((userData) => {
+            this.onSignedIn();
+            return userData;
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            // console.log(errorCode + errorMessage);
+            this.errormsg = errorMessage;
+          });
+      },
+      onSignedIn() {
+        // console.log('logged in trying to go to notes');
+        this.$router.go({ name: 'notes' });
+      },
+    },
+  };
+</script>
 <style scoped>
   h1{
 
