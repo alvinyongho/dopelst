@@ -29,6 +29,11 @@ const router = new Router({
       name: 'Bar',
       component: Bar,
     },
+    {
+      path: '/foo',
+      name: 'Playlist',
+      component: Foo,
+    },
   ],
 });
 

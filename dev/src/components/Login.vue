@@ -82,8 +82,7 @@
           });
       },
       onSignedIn() {
-        // console.log('logged in trying to go to notes');
-        this.$router.go({ name: 'notes' });
+        this.$router.push({ name: 'Playlist' });
       },
     },
   };
