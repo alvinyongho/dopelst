@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/" v-bind:style="linkStyle">HOME</router-link>
+      <router-link to="/" v-show="!isLogin">HOME</router-link>
       <div class="spacer">&nbsp;</div>
-      <div class="nav-link" v-bind:style="linkStyle" v-on:click="logoutUser">LOGOUT</div>
-      <router-link to="/bar" class="nav-link" v-bind:style="linkStyle">BAR</router-link>
-      <router-link to="/foo" class="nav-link" v-bind:style="linkStyle">FOO</router-link>
+      <div class="nav-link" v-show="!isLogin" v-on:click="logoutUser">LOGOUT</div>
+      <router-link to="/bar" class="nav-link" v-show="!isLogin">BAR</router-link>
+      <router-link to="/foo" class="nav-link" v-show="!isLogin">FOO</router-link>
     </nav>
     <router-view></router-view>
   </div>
@@ -31,13 +31,6 @@ export default {
     return {
       isLogin: false,
     };
-  },
-  computed: {
-    linkStyle() {
-      return {
-        display: this.isLogin ? 'none' : '',
-      };
-    },
   },
   methods: {
     logoutUser() {
