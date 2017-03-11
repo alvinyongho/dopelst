@@ -82,7 +82,7 @@
           });
       },
       onSignedIn() {
-        this.$router.push({ name: 'Playlists' });
+        this.$router.push({ name: 'Playlist' });
       },
     },
   };

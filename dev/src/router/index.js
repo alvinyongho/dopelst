@@ -6,7 +6,8 @@ import Hello from '@/components/Hello';
 import Login from '@/components/Login';
 import Foo from '@/components/Foo';
 import Bar from '@/components/Bar';
-import Playlists from '@/components/Playlists';
+import Playlist from '@/components/Playlist';
+import PlaylistDetail from '@/components/Playlist-Detail';
 
 Vue.use(Router);
 
@@ -33,9 +34,14 @@ const router = new Router({
       component: Bar,
     },
     {
-      path: '/playlists',
-      name: 'Playlists',
-      component: Playlists,
+      path: '/playlist',
+      name: 'Playlist',
+      component: Playlist,
+    },
+    {
+      path: '/playlist/:id',
+      name: 'Playlist-Detail',
+      component: PlaylistDetail,
     },
   ],
 });
