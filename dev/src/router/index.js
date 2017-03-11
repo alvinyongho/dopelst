@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import firebase from 'firebase';
+
 import Hello from '@/components/Hello';
 import Login from '@/components/Login';
 import Foo from '@/components/Foo';
@@ -38,10 +40,11 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  next();
-
-  /* Can redirect not logged in users here */
-  // next('/');
+  if (to.path !== '/login' && !firebase.auth().currentUser) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;
