@@ -4,8 +4,10 @@
       <router-link to="/" v-show="!isLogin">HOME</router-link>
       <div class="spacer">&nbsp;</div>
       <div class="nav-link" v-show="!isLogin" v-on:click="logoutUser">LOGOUT</div>
+      <!--
       <router-link to="/bar" class="nav-link" v-show="!isLogin">BAR</router-link>
       <router-link to="/foo" class="nav-link" v-show="!isLogin">FOO</router-link>
+      -->
     </nav>
     <router-view></router-view>
   </div>

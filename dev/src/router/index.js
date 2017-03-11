@@ -2,10 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
 
-import Hello from '@/components/Hello';
 import Login from '@/components/Login';
-import Foo from '@/components/Foo';
-import Bar from '@/components/Bar';
 import Playlist from '@/components/Playlist';
 import PlaylistDetail from '@/components/Playlist-Detail';
 
@@ -15,23 +12,12 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello,
+      redirect: '/playlist',
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
-    },
-    {
-      path: '/foo',
-      name: 'Foo',
-      component: Foo,
-    },
-    {
-      path: '/bar',
-      name: 'Bar',
-      component: Bar,
     },
     {
       path: '/playlist',
