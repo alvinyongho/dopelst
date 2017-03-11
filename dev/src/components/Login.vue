@@ -1,8 +1,5 @@
 <template>
   <div id="loginpage">
-    <center><router-link to="/" style="color: white;">Go Back</router-link></center>
-
-
     <form class="auth-form" v-on:submit.prevent="wantsToSignUp ? signUpWithPassword() : signInWithPassword()">
       <h1>{{wantsToSignUp ? 'Sign up' : 'Login'}}</h1>
       <div>
@@ -89,23 +86,26 @@
 </script>
 <style scoped>
   h1{
-
     margin-bottom: 5vh;
     font-weight: lighter;
-
   }
 
   #loginpage{
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
     background: #092756;
     background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top, rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%,#092756 100%);
     background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg, #670d10 0%,#092756 100%);
     background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%,#092756 100%);
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg, #670d10 0%,#092756 100%);
-    height: 100vh;
-    padding-top: 25px;
+    height: 100%;
     /*margin-bottom: 50px;*/
-
   }
 
   #login-form-container{
@@ -138,16 +138,20 @@
   }
 
 
-  .auth-form{
-
-    width: 300px;
-    top: 25vh;
-    /*left: 50vw;*/
+  .auth-form {
     margin: 0 auto;
-    background-color: #F5F5F5;
     padding: 15px;
-    margin-top: 50px;
+    width: 300px;
 
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    background-color: #F5F5F5;
   }
 
   button{
