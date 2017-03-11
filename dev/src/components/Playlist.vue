@@ -69,7 +69,7 @@ export default {
       playlistsRef.child(playlist['.key']).remove();
     },
     openPlaylist(playlist) {
-      this.$router.push({ name: 'Playlist-Detail', params: { id: playlist['.key'] } });
+      this.$router.push({ name: 'Playlist-Detail', params: { id: playlist['.key'], name: playlist.name } });
     },
   },
 

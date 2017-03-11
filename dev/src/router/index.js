@@ -18,16 +18,31 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+      meta: {
+        title() {
+          return 'Login | dopelst';
+        },
+      },
     },
     {
       path: '/playlist',
       name: 'Playlist',
       component: Playlist,
+      meta: {
+        title() {
+          return 'Playlist | dopelst';
+        },
+      },
     },
     {
       path: '/playlist/:id',
       name: 'Playlist-Detail',
       component: PlaylistDetail,
+      meta: {
+        title(params) {
+          return `${params.name} | dopelst`;
+        },
+      },
     },
   ],
 });

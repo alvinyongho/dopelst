@@ -47,20 +47,20 @@ export default {
 
       firebase.auth().signOut().then(onResolve.bind(this), onReject);
     },
-    syncRoute(path) {
-      this.isLogin = (path === '/login');
-      window.document.title = path;
+    syncRoute(route) {
+      this.isLogin = (route.path === '/login');
+      window.document.title = route.meta.title(route.params);
     },
   },
   created() {
     if (!firebase.auth().currentUser) {
       this.$router.push({ path: '/login' });
     }
-    this.syncRoute(this.$route.path);
+    this.syncRoute(this.$route);
   },
   watch: {
     $route(to) { // (to,from)
-      this.syncRoute(to.path);
+      this.syncRoute(to);
     },
   },
 };
