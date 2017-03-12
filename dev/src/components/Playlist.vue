@@ -32,8 +32,9 @@
                 <div>
                   <input type="submit" v-on:submit.prevent="createPlaylist" value="Create Playlist" />
                 </div>
-                <div class="progress-bar" v-show="uploadingImage" v-bind:style="{ width: uploadProgress }"></div>
-                <div class="progress-text" v-show="uploadingImage">{{uploadProgress}}</div>
+                <div class="progress-bar pos" v-show="uploadingImage" v-bind:style="{ width: uploadProgress + '%' }"></div>
+                <div class="progress-bar neg" v-show="uploadingImage" v-bind:style="{ width: (100 - uploadProgress) + '%' }"></div>
+                <div class="progress-text" v-show="uploadingImage">{{uploadProgress}}%</div>
               </form>
               <button id="create-playlist-modal-cancel" v-on:click="closeModal">Cancel</button>
             </div><!-- .modal-body -->
@@ -78,7 +79,7 @@ export default {
       },
       currentImage: {},
       uploadingImage: false,
-      uploadProgress: '0%',
+      uploadProgress: 0,
       modalVisible: false,
     };
   },
@@ -126,7 +127,7 @@ export default {
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.uploadProgress = `${progress}%`;
+          this.uploadProgress = progress;
 
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED:
@@ -171,7 +172,7 @@ export default {
       this.playlist.image = '';
 
       this.currentImage = {};
-      this.uploadProgress = '0%';
+      this.uploadProgress = 0;
 
       document.getElementById('create-playlist-modal-form').reset();
     },
@@ -256,8 +257,15 @@ section#playlist-view #header a {
 #create-playlist-modal .progress-bar {
   height: 1.5em;
 
-  background-color: #46a805;
   text-align: center;
+}
+
+#create-playlist-modal .progress-bar.pos {
+  background-color: #46a805;
+}
+
+#create-playlist-modal .progress-bar.neg {
+  background-color: #a80e05;
 }
 
 #create-playlist-modal .progress-text {
@@ -267,6 +275,7 @@ section#playlist-view #header a {
   top: -1.25em;
 
   text-align: center;
+  color: #fff;
 }
 
 #create-playlist-modal-label {
