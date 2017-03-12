@@ -6,7 +6,7 @@
         <a v-on:click="showCreateModal()">ADD PLAYLIST</a>
       </div><!-- #header -->
       <div id="playlist-grid">
-        <div class="playlist-element" v-for="playlist in playlists">
+        <div class="playlist-element" v-for="playlist in userPlaylists">
           <img v-bind:src="playlist.imgurl" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
           <a class="playlist-name" v-on:click="openPlaylist(playlist)">{{playlist.name}}</a>
 
@@ -74,12 +74,16 @@ export default {
   components: {
     PlaylistModal,
   },
-  firebase: {
-    playlists: playlistsRef,
+  firebase() {
+    return {
+      playlistsRef,
+      userPlaylists: playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid),
+    };
   },
   data() {
     return {
       playlist: {
+        owner: firebase.auth().currentUser.uid,
         name: '',
         description: '',
         image: '',
@@ -97,9 +101,16 @@ export default {
     createPlaylist() {
       if (this.playlist.name.trim() && this.playlist.description.trim()) {
         this.uploadImage(() => {
-          playlistsRef.push(this.playlist);
-          this.uploadingImage = false;
-          this.closeModal();
+          playlistsRef.push(this.playlist).then(
+            () => {
+              this.uploadingImage = false;
+              this.closeModal();
+            },
+            (err) => {
+              // eslint-disable-next-line
+              console.error(err);
+            },
+          );
         });
       }
     },
@@ -109,6 +120,7 @@ export default {
 
         if (this.imageUnchanged) {
           playlistsRef.child(key).update({
+            owner: this.playlist.owner,
             name: this.playlist.name,
             description: this.playlist.description,
           }).then(
@@ -121,6 +133,7 @@ export default {
         } else {
           this.uploadImage(() => {
             playlistsRef.child(key).update({
+              owner: this.playlist.owner,
               name: this.playlist.name,
               description: this.playlist.description,
               image: this.playlist.image,
@@ -224,7 +237,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style lang="scss" scoped>
