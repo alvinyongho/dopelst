@@ -3,7 +3,7 @@
     <div id="playlist-banner">
       <h1>{{playlist[0].name}}</h1>
       <h4>{{playlist[0].description}}</h4>
-      <p>Playlist · {{playlist.numsongs}} Songs</p>
+      <p>Playlist · {{songs.length}} Songs</p>
     </div><!-- .playlist-banner -->
 
     <div id="playlist-album-img">
@@ -27,9 +27,8 @@
     <table>
       <thead>
         <th>SONGS</th>
-        <th><a href="#" id="add-song" @click.prevent="showCreateModal = true">ADD SONG</a></th>
+        <th><a>ADD SONG</a></th>
         <!-- use the modal component, pass in the prop -->
-        <addsongmodal v-if="showCreateModal" @close="showCreateModal = false"></addsongmodal>
       </thead>
 
 
@@ -121,6 +120,9 @@ export default {
         this.song.link = '';
         // this.song.playlist = '';
       }
+    },
+    removeSong(song) {
+      songsRef.child(song['.key']).remove();
     },
   },
 
