@@ -128,6 +128,15 @@ export default {
 
 .modal-form {
   text-align: center;
+
+  input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
 }
 
 .modal-form input,
@@ -145,15 +154,6 @@ export default {
   background-color: #fff;
   color: #000;
   font-weight: 400;
-}
-
-.modal-form input[type="file"] {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
 }
 
 .modal-form input[type="file"] + label {
@@ -189,20 +189,22 @@ export default {
   cursor: pointer;
 }
 
-.modal-form input[type="submit"]:hover {
-  border-color: #3063bf;
-  background-color: #3063bf;
-  color: #fff;
+.modal-form input[type="submit"] {
+  &:hover {
+    border-color: #3063bf;
+    background-color: #3063bf;
+    color: #fff;
+  }
 }
 
 .modal-cancel {
   margin-top: 2em;
-}
 
-.modal-cancel:hover {
-  border-color: #a80e05;
-  background-color: #a80e05;
-  color: #fff;
+  &:hover {
+    border-color: #a80e05;
+    background-color: #a80e05;
+    color: #fff;
+  }
 }
 
 @media (min-width: 701px) {

@@ -227,79 +227,79 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #playlist {
   padding-top: 62px;
-}
 
-section#playlist-view {
-  margin: 0 auto;
-}
+  #playlist-view {
+    margin: 0 auto;
 
-section#playlist-view #header {
-  margin-top: 2em;
-  padding-bottom: 1em;
-  margin-bottom: 1em;
-  border-bottom: 1px solid black;
-}
+    #header {
+      margin-top: 2em;
+      padding-bottom: 1em;
+      margin-bottom: 1em;
+      border-bottom: 1px solid black;
 
-section#playlist-view #header h1 {
-  margin: 0;
+      h1 {
+        margin: 0;
 
-  display: inline-block;
+        display: inline-block;
 
-  font-size: 2em;
-}
+        font-size: 2em;
+      }
 
-section#playlist-view #header a {
-  margin: 0;
+      a {
+          margin: 0;
 
-  float: right;
+          float: right;
 
-  font-size: 0.75em;
+          font-size: 0.75em;
+      }
+    }
+  }
 }
 
 #playlist-grid {
   text-align: center;
-}
 
-#playlist-grid .playlist-element {
-  margin: 5px 20px 40px;
-  width: 160px;
+  .playlist-element {
+    margin: 5px 20px 40px;
+    width: 160px;
 
-  display: inline-block;
-}
+    display: inline-block;
 
-#playlist-grid .playlist-element .playlist-img {
-  width: 160px;
-  height: 160px;
+    .playlist-img {
+      width: 160px;
+      height: 160px;
 
-  cursor: pointer;
+      cursor: pointer;
 
-  box-shadow: 0 2px 4px rgba(0,0,0,.5);
-}
+      box-shadow: 0 2px 4px rgba(0,0,0,.5);
+    }
 
-#playlist-grid .playlist-element .playlist-name {
-  display: block;
+    .playlist-name {
+      display: block;
 
-  cursor: pointer;
+      cursor: pointer;
 
-  font-weight: bold;
-  text-transform: uppercase;
-}
+      font-weight: bold;
+      text-transform: uppercase;
+    }
 
-#playlist-grid .playlist-element .playlist-name:hover {
-  color: #7c7c7c;
+    .playlist-name:hover {
+      color: #7c7c7c;
+    }
+  }
 }
 
 @media (min-width: 701px) {
-  section#playlist-view {
+  #playlist-view {
     width: 60%;
   }
 }
 
 @media (max-width: 700px) {
-  section#playlist-view {
+  #playlist-view {
     width: 90%;
   }
 }
