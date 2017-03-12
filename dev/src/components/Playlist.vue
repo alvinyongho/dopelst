@@ -21,11 +21,13 @@
         <div class="modal-wrapper">
           <div class="modal-container" v-on:click.stop>
             <div class="modal-body">
-              <form v-on:submit.prevent="createPlaylist">
+              <form id="create-playlist-modal-form" v-on:submit.prevent="createPlaylist">
                 <input id="create-playlist-modal-autofocus" v-model="playlist.name" type="text" name="name" placeholder="playlist name" />
-                <input v-model="playlist.description" type="text" name="description" placeholder="playlist description" />
-                <input type="file" />
+                <input type="text" v-model="playlist.description" name="description" placeholder="playlist description" />
+                <input type="file" v-on:change="onFileChange"/>
                 <input type="submit" v-on:submit.prevent="createPlaylist" value="Create Playlist" />
+                <div class="progress-bar" v-show="uploadingImage" v-bind:style="{ width: uploadProgress }"></div>
+                <div class="progress-text" v-show="uploadingImage">{{uploadProgress}}</div>
               </form>
               <button v-on:click="closeModal">Cancel</button>
             </div><!-- .modal-body -->
@@ -49,8 +51,12 @@ const config = {
 };
 
 const app = firebase.initializeApp(config);
+
 const db = app.database();
 const playlistsRef = db.ref('playlists');
+
+const storageRef = firebase.storage().ref();
+const playlistImagesDir = 'playlistImages';
 
 export default {
   name: 'playlists',
@@ -64,14 +70,20 @@ export default {
         description: '',
         image: '',
       },
+      currentImage: {},
+      uploadingImage: false,
+      uploadProgress: '0%',
       modalVisible: false,
     };
   },
   methods: {
     createPlaylist() {
       if (this.playlist.name.trim() && this.playlist.description.trim()) {
-        playlistsRef.push(this.playlist);
-        this.closeModal();
+        this.uploadImage(() => {
+          playlistsRef.push(this.playlist);
+          this.uploadingImage = false;
+          this.closeModal();
+        });
       }
     },
     removePlaylist(playlist) {
@@ -79,6 +91,55 @@ export default {
     },
     openPlaylist(playlist) {
       this.$router.push({ name: 'Playlist-Detail', params: { id: playlist['.key'], name: playlist.name } });
+    },
+    onFileChange(e) {
+      const files = e.target.files || e.dataTransfer.files;
+      if (!files.length) {
+        return;
+      }
+      this.currentImage = files[0];
+    },
+    uploadImage(cb) {
+      this.uploadingImage = true;
+
+      const targetFile = this.currentImage;
+      const filename = `${firebase.auth().currentUser.uid}_${Date.now()}_${targetFile.name}`;
+      const relativeUrl = `${playlistImagesDir}/${filename}`;
+      const uploadPathRef = storageRef.child(relativeUrl);
+
+      const uploadTask = uploadPathRef.put(targetFile);
+
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.uploadProgress = `${progress}%`;
+
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED:
+              // eslint-disable-next-line
+              // console.log('Upload is paused');
+              break;
+            case firebase.storage.TaskState.RUNNING:
+              // eslint-disable-next-line
+              // console.log('Upload is running');
+              break;
+            default:
+              break;
+          }
+        },
+        (err) => {
+          // eslint-disable-next-line
+          console.error(err);
+
+          this.uploadingImage = false;
+        },
+        () => {
+          this.playlist.image = relativeUrl;
+          this.playlist.imgurl = uploadTask.snapshot.downloadURL;
+
+          cb();
+        },
+      );
     },
     showModal() {
       this.modalVisible = true;
@@ -94,6 +155,11 @@ export default {
       this.playlist.name = '';
       this.playlist.description = '';
       this.playlist.image = '';
+
+      this.currentImage = {};
+      this.uploadProgress = '0%';
+
+      document.getElementById('create-playlist-modal-form').reset();
     },
   },
   mounted() {
@@ -171,6 +237,22 @@ section#playlist-view #header a {
 
 #playlist-grid .playlist-element .playlist-name:hover {
   color: #7c7c7c;
+}
+
+#create-playlist-modal .progress-bar {
+  height: 1.5em;
+
+  background-color: green;
+  text-align: center;
+}
+
+#create-playlist-modal .progress-text {
+  position: static;
+
+  position: relative;
+  top: -1.25em;
+
+  text-align: center;
 }
 
 @media (min-width: 701px) {

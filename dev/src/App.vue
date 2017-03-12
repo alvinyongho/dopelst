@@ -36,16 +36,11 @@ export default {
   },
   methods: {
     logoutUser() {
-      const onResolve = function onResolve() {
-        this.$router.push({ path: '/login' });
-      };
-
-      const onReject = function onReject(err) {
+      firebase.auth().signOut().then(
+        () => this.$router.push({ path: '/login' }),
         // eslint-disable-next-line
-        console.error(err);
-      };
-
-      firebase.auth().signOut().then(onResolve.bind(this), onReject);
+        console.error,
+      );
     },
     syncRoute(route) {
       this.isLogin = (route.path === '/login');
