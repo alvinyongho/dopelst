@@ -21,15 +21,21 @@
         <div class="modal-wrapper">
           <div class="modal-container" v-on:click.stop>
             <div class="modal-body">
+              <div id="create-playlist-modal-label">CREATE PLAYLIST</div>
               <form id="create-playlist-modal-form" v-on:submit.prevent="createPlaylist">
-                <input id="create-playlist-modal-autofocus" v-model="playlist.name" type="text" name="name" placeholder="playlist name" />
-                <input type="text" v-model="playlist.description" name="description" placeholder="playlist description" />
-                <input type="file" v-on:change="onFileChange"/>
-                <input type="submit" v-on:submit.prevent="createPlaylist" value="Create Playlist" />
+                <input id="create-playlist-modal-autofocus" v-model="playlist.name" type="text" name="name" placeholder="Playlist Name" />
+                <input type="text" v-model="playlist.description" name="description" placeholder="Playlist Description" />
+                <div>
+                  <input id="create-playlist-modal-fileinput" type="file" name="file" v-on:change="onFileChange"/>
+                  <label for="file" v-on:click="clickFile()">{{fileLabelText}}</label>
+                </div>
+                <div>
+                  <input type="submit" v-on:submit.prevent="createPlaylist" value="Create Playlist" />
+                </div>
                 <div class="progress-bar" v-show="uploadingImage" v-bind:style="{ width: uploadProgress }"></div>
                 <div class="progress-text" v-show="uploadingImage">{{uploadProgress}}</div>
               </form>
-              <button v-on:click="closeModal">Cancel</button>
+              <button id="create-playlist-modal-cancel" v-on:click="closeModal">Cancel</button>
             </div><!-- .modal-body -->
           </div><!-- .modal-container -->
         </div><!-- .modal-wrapper -->
@@ -76,6 +82,11 @@ export default {
       modalVisible: false,
     };
   },
+  computed: {
+    fileLabelText() {
+      return this.currentImage.name || 'Choose a File';
+    },
+  },
   methods: {
     createPlaylist() {
       if (this.playlist.name.trim() && this.playlist.description.trim()) {
@@ -91,6 +102,9 @@ export default {
     },
     openPlaylist(playlist) {
       this.$router.push({ name: 'Playlist-Detail', params: { id: playlist['.key'], name: playlist.name } });
+    },
+    clickFile() {
+      document.getElementById('create-playlist-modal-fileinput').click();
     },
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
@@ -242,7 +256,7 @@ section#playlist-view #header a {
 #create-playlist-modal .progress-bar {
   height: 1.5em;
 
-  background-color: green;
+  background-color: #46a805;
   text-align: center;
 }
 
@@ -255,15 +269,113 @@ section#playlist-view #header a {
   text-align: center;
 }
 
+#create-playlist-modal-label {
+  margin-bottom: 0.8em;
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.2em;
+
+  display: inline-block;
+
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#create-playlist-modal-form {
+  text-align: center;
+}
+
+#create-playlist-modal-form input,
+#create-playlist-modal-form input[type="file"] + label,
+#create-playlist-modal-cancel {
+  margin-bottom: 2em;
+  border: 1px solid #000;
+  border-radius: 0;
+  padding: 0.75em;
+  width: 90%;
+
+  -webkit-appearance: none;
+  --moz-appearance: none;
+
+  background-color: #fff;
+  color: #000;
+  font-weight: 400;
+}
+
+#create-playlist-modal-form input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#create-playlist-modal-form input[type="file"] + label {
+  margin: 0 auto;
+  margin-bottom: 2em;
+  padding: 0.25em;
+  width: auto;
+
+  display: inline-block;
+  cursor: pointer;
+
+  font-size: 0.8em;
+}
+
+#create-playlist-modal-form input[type="file"]:focus + label,
+#create-playlist-modal-form input[type="file"] + label:hover {
+  border-color: #46a805;
+  background-color: #46a805;
+  color: #fff;
+}
+
+#create-playlist-modal-form input[type="file"]:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+#create-playlist-modal-form input[type="submit"],
+#create-playlist-modal-cancel {
+  padding: 0.25em;
+  width: auto;
+
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+#create-playlist-modal-form input[type="submit"]:hover {
+  border-color: #3063bf;
+  background-color: #3063bf;
+  color: #fff;
+}
+
+#create-playlist-modal-cancel {
+  margin-top: 2em;
+}
+
+#create-playlist-modal-cancel:hover {
+  border-color: #a80e05;
+  background-color: #a80e05;
+  color: #fff;
+}
+
 @media (min-width: 701px) {
   section#playlist-view {
     width: 60%;
+  }
+
+  .modal-container {
+    width: 400px;
   }
 }
 
 @media (max-width: 700px) {
   section#playlist-view {
     width: 90%;
+  }
+
+  .modal-container {
+    width: 80%;
   }
 }
 
@@ -288,7 +400,6 @@ section#playlist-view #header a {
 }
 
 .modal-container {
-  width: 300px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -305,6 +416,8 @@ section#playlist-view #header a {
 
 .modal-body {
   margin: 20px 0;
+
+  text-align: center;
 }
 
 .modal-default-button {
