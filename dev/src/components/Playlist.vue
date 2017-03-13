@@ -6,8 +6,9 @@
         <a v-on:click="showCreateModal()">ADD PLAYLIST</a>
       </div><!-- #header -->
       <div id="playlist-grid">
-        <div class="playlist-element" v-for="playlist in userPlaylists">
-          <img v-bind:src="playlist.imgurl" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
+        <div class="playlist-element" v-for="(playlist, idx) in userPlaylists">
+          <!-- v-bind:src="playlist.imgurl" -->
+          <img v-bind:id="'playlist-img-' + idx" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
           <a class="playlist-name" v-on:click="openPlaylist(playlist)">{{playlist.name}}</a>
 
           <button v-on:click="removePlaylist(playlist)">Delete</button>
@@ -96,6 +97,22 @@ export default {
       createModalVisible: false,
       editModalVisible: false,
     };
+  },
+  mounted() {
+    playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid).on('value', (snapshot) => {
+      const vals = snapshot.val();
+      const valArray = Object.keys(vals).map(key => vals[key]);
+      valArray.forEach((val, i) => {
+        this.$nextTick(() => {
+          const img = document.getElementById(`playlist-img-${i}`);
+          const downloadingImage = new Image();
+          downloadingImage.onload = function onLoad() {
+            img.src = this.src;
+          };
+          downloadingImage.src = val.imgurl;
+        });
+      });
+    });
   },
   methods: {
     createPlaylist() {

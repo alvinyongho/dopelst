@@ -44,7 +44,7 @@ export default {
     },
     syncRoute(route) {
       this.isLogin = (route.path === '/login');
-      window.document.title = route.meta.title(route.params);
+      document.title = route.meta.title(route.params);
     },
   },
   created() {
