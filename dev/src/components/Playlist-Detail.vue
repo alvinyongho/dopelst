@@ -14,7 +14,7 @@
     </div><!-- #playlist-album-img -->
 
 
-    <a v-on:click="showCreateModal()">Add Song</a>
+    <!-- <a v-on:click="showCreateModal()">Add Song</a> -->
 
     <SongModal name="Create Song"
     v-bind:song="song"
@@ -37,7 +37,7 @@
     <table>
       <thead>
         <th>SONGS</th>
-        <th><a>ADD SONG</a></th>
+        <th><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
         <!-- use the modal component, pass in the prop -->
       </thead>
 
@@ -50,26 +50,8 @@
         <td>
             <!-- Song buttons -->
             <div class="songs-buttons">
-              <span class="song-btn">4:19</span>
-
-              <div class="dropdown" id="dropdown-menu">
-                <button class="dropbtn">Play</button>
-                <div class="dropdown-content" id="#dropdown-play">
-                  <a href="">SPOTIFY</a>
-                  <a href="">ITUNES</a>
-                  <a href="">YOUTUBE</a>
-                </div> <!--.dropdown-content-->
-              </div><!--.dropdown #dropdown-play-->
-
               <a @click.prevent="showEditModal(song)" class="song-btn">Edit</a>
-
-              <div class="dropdown" id="dropdown-menu">
-                <button class="dropbtn">Menu</button>
-                <div class="dropdown-content">
-                  <a href="/share.html">SHARE</a>
-                  <a v-on:click="removeSong(song)">DELETE</a>
-                </div><!--.dropdown-content-->
-              </div><!-- .dropdown -->
+              <a v-on:click="removeSong(song)">Delete</a>
           </div><!-- #song-btn-wrapper -->
         </td>
       </tr> <!-- End of single entry -->
@@ -195,10 +177,166 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
-#playlist{
+// #playlist{
+//   padding: 80px;
+// }
+
+table{
+  font-family: 'Muli', sans-serif;
+  width: 100%;
   padding: 80px;
 }
+
+table th{
+  text-align: left;
+  border-bottom: 1px solid #000;
+  padding-left: 1em;
+  padding-bottom: 10px;
+
+}
+
+table tr td{
+  padding: 15px;
+}
+
+.songs-buttons {
+  float: right;
+}
+
+#song-list-title {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.songs th, td {
+    border-bottom: 1px solid #d2d2d2;
+    padding-left: 1em;
+}
+
+.song-btn {
+  margin-right: 25px;
+}
+
+#add-song{
+    font-size: .75em;
+}
+
+#add-song:hover{
+    color: blue;
+}
+
+#add-song {
+    float: right;
+    font-family: Montserrat,sans-serif;
+    padding-right: 2em;
+}
+
+
+#playlist-wrapper {
+	min-height: 100%;
+}
+
+#playlist-banner {
+	height: 25vh;
+  padding: 80px;
+	background: #0e0a0a;
+	background: -webkit-linear-gradient(left, #0e0a0a, #65151e);
+	background: -moz-linear-gradient(left, #0e0a0a, #65151e);
+	background: -ms-linear-gradient(left, #0e0a0a, #65151e);
+	background: -o-linear-gradient(left, #0e0a0a, #65151e);
+	background: linear-gradient(to right, #0e0a0a, #65151e);
+}
+
+
+
+#playlist-banner h1 {
+  padding-top: 80px;
+	font-family: 'Muli', sans-serif;
+	color: #fff;
+	font-size: 1.75em;
+}
+
+#playlist-banner h4 {
+	font-family: 'Muli', sans-serif;
+	color: #fff;
+	font-size: 1em;
+}
+
+#playlist-banner>p {
+	font-family: 'Muli', sans-serif;
+	color: #cdcdcd;
+	font-size: 0.75em;
+}
+
+#playlist-album-img {
+	height: 230px;
+	width: 230px;
+	position: absolute;
+	margin: 0;
+	top: 20%;
+	right: 10%;
+	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+#playlist-album-img img{
+	height: 100%;
+	width: 100%;
+}
+
+
+@media screen and (max-width: 1056px) {
+
+  #playlist-album-img {
+  	height: 316px;
+  	width: 316px;
+  	position: absolute;
+  	margin: 0;
+    visibility: hidden;
+    margin-top: 100px;
+  	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+  }
+
+
+  #playlist-album-img img{
+  	height: 100%;
+  	width: 100%;
+    visibility: hidden;
+  }
+
+  #playlist-body{
+    visibility: hidden;
+    position: absolute;
+  }
+
+
+}
+
+
+#playlist-body {
+	margin: 2% 10%;
+	width: 50%;
+}
+
+#playlist-body p {
+	font-family: 'Muli', sans-serif;
+	font-size: 0.75em;
+	font-weight: 200;
+}
+
+#playlist-album-img{
+  label {
+    margin: 0;
+    font-size: .75em;
+
+  }
+  input {
+
+  }
+}
+
+
 
 </style>
