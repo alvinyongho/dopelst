@@ -7,9 +7,8 @@
     </div><!-- .playlist-banner -->
 
     <div id="playlist-album-img">
-      <!-- <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" /> -->
+      <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
 
-      <img id="playlist-img" class="playlist-img" v-bind:alt="playlist[0].name" />
 
     </div><!-- #playlist-album-img -->
 
@@ -33,29 +32,30 @@
     />
 
     <!-- end #create-song -->
+    <div class="songs">
+      <table>
+        <thead>
+          <th>SONGS</th>
+          <th><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
+          <!-- use the modal component, pass in the prop -->
+        </thead>
 
-    <table>
-      <thead>
-        <th>SONGS</th>
-        <th><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
-        <!-- use the modal component, pass in the prop -->
-      </thead>
 
-
-      <tr v-for="song in songs">
-        <!--  Song title and tags -->
-        <td>
-          <span class ="songs-list-details"><a href="/song-details.html" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
-        </td>
-        <td>
-            <!-- Song buttons -->
-            <div class="songs-buttons">
-              <a @click.prevent="showEditModal(song)" class="song-btn">Edit</a>
-              <a v-on:click="removeSong(song)">Delete</a>
-          </div><!-- #song-btn-wrapper -->
-        </td>
-      </tr> <!-- End of single entry -->
-    </table>
+        <tr v-for="song in songs">
+          <!--  Song title and tags -->
+          <td>
+            <span class ="songs-list-details"><a href="/song-details.html" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
+          </td>
+          <td>
+              <!-- Song buttons -->
+              <div class="songs-buttons">
+                <a @click.prevent="showEditModal(song)" class="song-btn">Edit</a>
+                <a v-on:click="removeSong(song)">Delete</a>
+            </div><!-- #song-btn-wrapper -->
+          </td>
+        </tr> <!-- End of single entry -->
+      </table>
+    </div>
 
   </div>
 </template>
@@ -96,21 +96,6 @@ export default {
       createModalVisible: false,
       editModalVisible: false,
     };
-  },
-  mounted() {
-    playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
-      const vals = snapshot.val();
-      const valArray = Object.keys(vals).map(key => vals[key]);
-
-      this.$nextTick(() => {
-        const img = document.getElementById('playlist-img');
-        const downloadingImage = new Image();
-        downloadingImage.onload = function onLoad() {
-          img.src = this.src;
-        };
-        downloadingImage.src = valArray[0].imgurl;
-      });
-    });
   },
 
   methods: {
@@ -182,23 +167,44 @@ export default {
 // #playlist{
 //   padding: 80px;
 // }
+#playlist-banner h4, p{
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.songs {
+  margin: 5% 5%;
+}
 
 table{
   font-family: 'Muli', sans-serif;
   width: 100%;
   padding: 80px;
+  border-collapse: collapse;
+
 }
 
-table th{
+table th, td {
   text-align: left;
-  border-bottom: 1px solid #000;
   padding-left: 1em;
   padding-bottom: 10px;
 
 }
 
+table thead{
+  border-bottom: 1.5px solid #000;
+}
+
+table th{
+  border-bottom: 2px solid #000;
+
+}
+
+
 table tr td{
   padding: 15px;
+  border-bottom: 1px solid #d2d2d2;
+
 }
 
 .songs-buttons {
@@ -212,7 +218,7 @@ table tr td{
 }
 
 .songs th, td {
-    border-bottom: 1px solid #d2d2d2;
+    // border-bottom: 1px solid #d2d2d2;
     padding-left: 1em;
 }
 
@@ -240,7 +246,7 @@ table tr td{
 }
 
 #playlist-banner {
-	height: 25vh;
+	height: 170px;
   padding: 80px;
 	background: #0e0a0a;
 	background: -webkit-linear-gradient(left, #0e0a0a, #65151e);
