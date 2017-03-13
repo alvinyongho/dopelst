@@ -189,7 +189,7 @@ export default {
 }
 
 .songs {
-  margin: 5% 10%;
+  margin: 5% 5%;
 }
 
 table{
