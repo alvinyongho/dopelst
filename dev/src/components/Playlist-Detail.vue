@@ -11,16 +11,23 @@
     </div><!-- #playlist-album-img -->
 
 
+    <a v-on:click="showCreateModal()">Add Song</a>
 
-    <!-- #create-song-->
-    <div id="create-song">
-      <form v-on:submit.prevent="addSong">
-        <input v-model="song.name" type="text" name="name" placeholder="song name" />
-        <input v-model="song.artist" type="text" name="artist" placeholder="song artist" />
-        <input v-model="song.link" type="text" name="link" placeholder="song link" />
-        <input type="submit" v-on:submit.prevent="addSong" value="submit" />
-      </form>
-    </div>
+    <SongModal name="Create Song"
+    v-bind:song="song"
+    v-bind:modalVisible="createModalVisible"
+
+    v-bind:closeModal="closeModal"
+    v-bind:songAction="createSong"
+    />
+
+    <SongModal name="Edit Song"
+    v-bind:song="song"
+    v-bind:modalVisible="editModalVisible"
+
+    v-bind:closeModal="closeModal"
+    v-bind:songAction="editSong"
+    />
 
     <!-- end #create-song -->
 
@@ -35,7 +42,7 @@
       <tr v-for="song in songs">
         <!--  Song title and tags -->
         <td>
-          <span class ="songs-list-details"><a href="/song-details.html" id="song-list-title">{{song.title}} </a> · {{song.artist}}</span>
+          <span class ="songs-list-details"><a href="/song-details.html" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
         </td>
         <td>
             <!-- Song buttons -->
@@ -51,7 +58,7 @@
                 </div> <!--.dropdown-content-->
               </div><!--.dropdown #dropdown-play-->
 
-              <a @click.prevent="editSong(song)" class="song-btn">Edit</a>
+              <a @click.prevent="showEditModal(song)" class="song-btn">Edit</a>
 
               <div class="dropdown" id="dropdown-menu">
                 <button class="dropbtn">Menu</button>
@@ -63,12 +70,7 @@
           </div><!-- #song-btn-wrapper -->
         </td>
       </tr> <!-- End of single entry -->
-
-
-
     </table>
-
-
 
   </div>
 </template>
@@ -78,6 +80,7 @@
 
 <script>
 import firebase from 'firebase';
+import SongModal from './elements/SongModal';
 
 const db = firebase.database();
 const playlistsRef = db.ref('playlists');
@@ -86,6 +89,7 @@ const songsRef = db.ref('songs');
 
 export default {
   name: 'detail',
+  components: { SongModal },
   firebase() {
     return {
       playlist: {
@@ -104,28 +108,70 @@ export default {
         link: '',
         playlist: this.$route.params.id,
       },
-      showCreateModal: false,
-      showEditModal: false,
+      createModalVisible: false,
+      editModalVisible: false,
     };
   },
   methods: {
-    addSong() {
+    createSong() {
       if (this.song.name.trim() &&
           this.song.artist.trim() &&
-          this.song.link.trim() &&
-          this.song.playlist.trim()) {
+          this.song.link.trim()) {
         songsRef.push(this.song);
         this.song.name = '';
         this.song.artist = '';
         this.song.link = '';
+        this.song.playlist = this.song.playlist;
+        this.closeModal();
         // this.song.playlist = '';
       }
+    },
+    editSong() {
+      if (this.song.name.trim() && this.song.artist.trim()) {
+        const key = this.song['.key'];
+
+        songsRef.child(key).update({
+          name: this.song.name,
+          artist: this.song.artist,
+          link: this.song.link,
+          playlist: this.song.playlist,
+        }).then(
+          () => {
+            this.closeModal();
+          },
+          (err) => {
+            // eslint-disable-next-line
+            console.error(err);
+          },
+        );
+      }
+    },
+    showEditModal(song) {
+      this.song = song;
+      this.editModalVisible = true;
+    },
+    showCreateModal() {
+      this.createModalVisible = true;
     },
     removeSong(song) {
       songsRef.child(song['.key']).remove();
     },
+    closeModal() {
+      this.createModalVisible = false;
+      this.editModalVisible = false;
+      this.resetForms();
+      // reset forms
+    },
+    resetForms() {
+      this.song = {
+        name: '',
+        artist: '',
+        link: '',
+        playlist: this.song.playlist,
+      };
+      Array.prototype.slice.call(document.forms).forEach(form => form.reset());
+    },
   },
-
 };
 
 </script>
