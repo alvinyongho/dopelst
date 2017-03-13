@@ -7,9 +7,8 @@
     </div><!-- .playlist-banner -->
 
     <div id="playlist-album-img">
-      <!-- <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" /> -->
+      <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
 
-      <img id="playlist-img" class="playlist-img" v-bind:alt="playlist[0].name" />
 
     </div><!-- #playlist-album-img -->
 
@@ -97,21 +96,6 @@ export default {
       createModalVisible: false,
       editModalVisible: false,
     };
-  },
-  mounted() {
-    playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
-      const vals = snapshot.val();
-      const valArray = Object.keys(vals).map(key => vals[key]);
-
-      this.$nextTick(() => {
-        const img = document.getElementById('playlist-img');
-        const downloadingImage = new Image();
-        downloadingImage.onload = function onLoad() {
-          img.src = this.src;
-        };
-        downloadingImage.src = valArray[0].imgurl;
-      });
-    });
   },
 
   methods: {
