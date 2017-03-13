@@ -2,7 +2,18 @@
   "name": "dopelst",
   "version": "1.0.0",
   "description": "Dopelst Dev Folder",
-  "author": "David Luu <luu.david.c@gmail.com>",
+  "contributors": [
+    {
+      "name": "Alvin Ho"
+    },
+    {
+      "name": "Lauren Liu"
+    },
+    {
+      "name": "David Luu",
+      "email": "luu.david.c@gmail.com"
+    }
+  ],
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -72,6 +83,7 @@
     "sass-loader": "^6.0.3",
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
+    "serviceworker-webpack-plugin": "^0.2.0",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
