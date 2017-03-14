@@ -39,7 +39,7 @@ export default {
       firebase.auth().signOut().then(
         () => this.$router.push({ path: '/login' }),
         // eslint-disable-next-line
-        console.error,
+        err => console.error(err),
       );
     },
     syncRoute(route) {
@@ -48,10 +48,14 @@ export default {
     },
   },
   created() {
-    if (!firebase.auth().currentUser) {
-      this.$router.push({ path: '/login' });
-    }
-    this.syncRoute(this.$route);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$router.push({ path: '/' });
+      } else {
+        this.$router.push({ path: '/login' });
+      }
+      this.syncRoute(this.$route);
+    });
   },
   watch: {
     $route(to) { // (to,from)

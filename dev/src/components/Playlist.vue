@@ -66,9 +66,10 @@ const app = firebase.initializeApp(config);
 
 const db = app.database();
 const playlistsRef = db.ref('playlists');
+const playlistImagesRef = db.ref('playlistImages');
 
-const storageRef = firebase.storage().ref();
-const playlistImagesDir = 'playlistImages';
+// const storageRef = firebase.storage().ref();
+// const playlistImagesDir = 'playlistImages';
 
 export default {
   name: 'playlists',
@@ -87,8 +88,7 @@ export default {
         owner: firebase.auth().currentUser.uid,
         name: '',
         description: '',
-        image: '',
-        imgurl: '',
+        imageRef: '',
       },
       currentImage: {},
       imageUnchanged: true,
@@ -99,18 +99,16 @@ export default {
     };
   },
   mounted() {
-    playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid).on('value', (snapshot) => {
-      const vals = snapshot.val();
-      if (vals) {
-        const valArray = Object.keys(vals).map(key => vals[key]);
+    playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid).on('value', (playlistsSnapshot) => {
+      const playlists = playlistsSnapshot.val();
+      if (playlists) {
+        const valArray = Object.keys(playlists).map(key => playlists[key]);
         valArray.forEach((val, i) => {
           this.$nextTick(() => {
             const img = document.getElementById(`playlist-img-${i}`);
-            const downloadingImage = new Image();
-            downloadingImage.onload = function onLoad() {
-              img.src = this.src;
-            };
-            downloadingImage.src = val.imgurl;
+            playlistImagesRef.child(val.imageRef).on('value', (playlistImageSnapshot) => {
+              img.src = playlistImageSnapshot.val();
+            });
           });
         });
       }
@@ -155,8 +153,7 @@ export default {
               owner: this.playlist.owner,
               name: this.playlist.name,
               description: this.playlist.description,
-              image: this.playlist.image,
-              imgurl: this.playlist.imgurl,
+              imageRef: this.playlist.imageRef,
             }).then(
               () => {
                 this.uploadingImage = false;
@@ -186,6 +183,27 @@ export default {
       this.imageUnchanged = false;
     },
     uploadImage(cb) {
+      this.uploadingImage = true;
+
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        playlistImagesRef.push(reader.result).then(
+          (snapshot) => {
+            this.playlist.imageRef = snapshot.key;
+
+            cb();
+          },
+          (err) => {
+            // eslint-disable-next-line
+            console.error(err);
+
+            this.uploadingImage = false;
+          },
+        );
+      });
+      reader.readAsDataURL(this.currentImage);
+
+      /*
       this.uploadingImage = true;
 
       const targetFile = this.currentImage;
@@ -226,6 +244,7 @@ export default {
           cb();
         },
       );
+      */
     },
     showCreateModal() {
       this.createModalVisible = true;
@@ -244,8 +263,7 @@ export default {
       this.playlist = {
         name: '',
         description: '',
-        image: '',
-        imgurl: '',
+        imageRef: '',
       };
 
       this.currentImage = {};
