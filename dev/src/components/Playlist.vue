@@ -101,17 +101,19 @@ export default {
   mounted() {
     playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid).on('value', (snapshot) => {
       const vals = snapshot.val();
-      const valArray = Object.keys(vals).map(key => vals[key]);
-      valArray.forEach((val, i) => {
-        this.$nextTick(() => {
-          const img = document.getElementById(`playlist-img-${i}`);
-          const downloadingImage = new Image();
-          downloadingImage.onload = function onLoad() {
-            img.src = this.src;
-          };
-          downloadingImage.src = val.imgurl;
+      if (vals) {
+        const valArray = Object.keys(vals).map(key => vals[key]);
+        valArray.forEach((val, i) => {
+          this.$nextTick(() => {
+            const img = document.getElementById(`playlist-img-${i}`);
+            const downloadingImage = new Image();
+            downloadingImage.onload = function onLoad() {
+              img.src = this.src;
+            };
+            downloadingImage.src = val.imgurl;
+          });
         });
-      });
+      }
     });
   },
   methods: {
