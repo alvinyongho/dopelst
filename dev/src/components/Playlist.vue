@@ -95,20 +95,25 @@ export default {
     };
   },
   mounted() {
-    playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid).on('value', (playlistsSnapshot) => {
-      const playlists = playlistsSnapshot.val();
-      if (playlists) {
-        const valArray = Object.keys(playlists).map(key => playlists[key]);
-        valArray.forEach((val, i) => {
-          this.$nextTick(() => {
-            const img = document.getElementById(`playlist-img-${i}`);
-            playlistImagesRef.child(val.imageRef).on('value', (playlistImageSnapshot) => {
-              img.src = playlistImageSnapshot.val();
+    playlistsRef
+      .orderByChild('owner')
+      .equalTo(firebase.auth().currentUser.uid)
+      .on('value', (playlistsSnapshot) => {
+        const playlists = playlistsSnapshot.val();
+        if (playlists) {
+          const valArray = Object.keys(playlists).map(key => playlists[key]);
+          valArray.forEach((val, i) => {
+            this.$nextTick(() => {
+              const img = document.getElementById(`playlist-img-${i}`);
+              playlistImagesRef
+                .child(val.imageRef)
+                .on('value', (playlistImageSnapshot) => {
+                  img.src = playlistImageSnapshot.val();
+                });
             });
           });
-        });
-      }
-    });
+        }
+      });
   },
   methods: {
     createPlaylist() {
@@ -168,7 +173,13 @@ export default {
       playlistsRef.child(playlist['.key']).remove();
     },
     openPlaylist(playlist) {
-      this.$router.push({ name: 'Playlist-Detail', params: { id: playlist['.key'], name: playlist.name } });
+      this.$router.push({
+        name: 'Playlist-Detail',
+        params: {
+          id: playlist['.key'],
+          name: playlist.name,
+        },
+      });
     },
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
