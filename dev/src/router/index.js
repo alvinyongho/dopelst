@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
 
+import Index from '@/components/Index';
 import Login from '@/components/Login';
 import Playlist from '@/components/Playlist';
 import PlaylistDetail from '@/components/Playlist-Detail';
@@ -13,7 +14,13 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/playlist',
+      name: 'Index',
+      component: Index,
+      meta: {
+        title() {
+          return 'dopelst';
+        },
+      },
     },
     {
       path: '/login',
@@ -61,8 +68,10 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' && !firebase.auth().currentUser) {
+  if (!firebase.auth().currentUser && to.path !== '/' && to.path !== '/login') {
     next('/login');
+  } else if (firebase.auth().currentUser && to.path === '/') {
+    next('/playlist');
   } else {
     next();
   }
