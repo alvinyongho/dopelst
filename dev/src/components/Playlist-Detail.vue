@@ -1,16 +1,16 @@
 <template>
   <div id="playlist">
     <div id="playlist-banner">
-      <h1>{{playlist[0].name}}</h1>
-      <h4>{{playlist[0].description}}</h4>
-      <p>Playlist · {{songs.length}} Songs</p>
+      <div class="songs-content" id="playlist-banner-text">
+        <h1>{{playlist[0].name}}</h1>
+        <h4>{{playlist[0].description}}</h4>
+        <p>Playlist · {{songs.length}} Songs</p>
+      </div><!-- .songs-content -->
+      <div id="playlist-album-img">
+        <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
+      </div><!-- #playlist-album-img -->
+    
     </div><!-- .playlist-banner -->
-
-    <div id="playlist-album-img">
-      <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
-
-
-    </div><!-- #playlist-album-img -->
 
 
     <!-- <a v-on:click="showCreateModal()">Add Song</a> -->
@@ -32,7 +32,7 @@
     />
 
     <!-- end #create-song -->
-    <div class="songs">
+    <div id="songs-chart">
       <table>
         <thead>
           <th>SONGS</th>
@@ -163,185 +163,310 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$banner-gradient-1st-color: #0e0a0a;
+$banner-gradient-2nd-color: #6C237C;
 
-// #playlist{
-//   padding: 80px;
-// }
-#playlist-banner h4, p{
-  margin: 0;
-  margin-bottom: 5px;
+$side-margin-size: 12%;
+$song-chart-height-margin: 10%;
+
+#playlist {
+  
+
+  #playlist-banner {
+    position: relative;
+    height: 350px;
+    width: 100%;
+    /* Banner gradient properties*/
+    background: $banner-gradient-1st-color;
+    background: -webkit-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
+    background: -moz-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
+    background: -ms-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
+    background: -o-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
+    background: linear-gradient(to right, $banner-gradient-1st-color, $banner-gradient-2nd-color);
+
+
+    
+    #playlist-banner-text {
+      display: inline-block;
+      position: relative;
+      margin-left: $side-margin-size;
+      margin-right: $side-margin-size;
+
+      h4,p {
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      h1 {
+        padding-top: 0px;
+        font-family: 'Muli', sans-serif;
+        color: #fff;
+        font-size: 1.75em;
+      }
+
+      h4 {
+        font-family: 'Muli', sans-serif;
+        color: #cdcdcd;
+        font-size: 1em;
+      }
+
+      p {
+        font-family: 'Muli', sans-serif;
+        color: #cdcdcd;
+        font-size: 0.75em;
+      }
+    }
+    #playlist-album-img {
+      display: inline-block;
+      height: 300px;
+      width: 300px;
+      position: absolute;
+      margin: 0;
+      top: 20%;
+      right: 10%;
+      box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+      background-color: #fff;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+
+
+
+
+    label {
+      margin: 0;
+      font-size: .75em;
+    }
+
+    }
+
+
+  }
+
+  #songs-chart {
+    margin-top: $song-chart-height-margin;
+    margin-bottom: $song-chart-height-margin;
+    margin-left: $side-margin-size;
+    margin-right: $side-margin-size;
+
+    table{
+      font-family: 'Muli', sans-serif;
+      width: 100%;
+      padding: 80px;
+      border-collapse: collapse;
+
+      thead{
+        border-bottom: 1.5px solid #000;
+
+        #add-song{
+            font-size: .75em;
+            float: right;
+            font-family: "Montserrat", Helvetica, sans-serif;
+            padding-right: 2em;
+
+            &:hover {
+              color: #636363;
+            }
+        }
+      }
+      th{
+        border-bottom: 2px solid #000;
+
+      }
+      th, td {
+        text-align: left;
+        padding-left: 1em;
+        padding-bottom: 10px;
+
+      }
+
+      tr td{
+        padding: 15px;
+        border-bottom: 1px solid #d2d2d2;
+        .songs-buttons {
+          float: right;
+          .song-btn {
+            margin-right: 25px;
+          }
+        }
+        #song-list-title {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+      }
+    }   
+  }
 }
 
-.songs {
-  margin: 5% 5%;
-}
-
-table{
-  font-family: 'Muli', sans-serif;
-  width: 100%;
-  padding: 80px;
-  border-collapse: collapse;
-
-}
-
-table th, td {
-  text-align: left;
-  padding-left: 1em;
-  padding-bottom: 10px;
-
-}
-
-table thead{
-  border-bottom: 1.5px solid #000;
-}
-
-table th{
-  border-bottom: 2px solid #000;
-
-}
-
-
-table tr td{
-  padding: 15px;
-  border-bottom: 1px solid #d2d2d2;
-
-}
-
-.songs-buttons {
-  float: right;
-}
-
-#song-list-title {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-}
-
-.songs th, td {
-    // border-bottom: 1px solid #d2d2d2;
-    padding-left: 1em;
-}
-
-.song-btn {
-  margin-right: 25px;
-}
-
-#add-song{
-    font-size: .75em;
-}
-
-#add-song:hover{
-    color: blue;
-}
-
-#add-song {
-    float: right;
-    font-family: Montserrat,sans-serif;
-    padding-right: 2em;
-}
-
-
-#playlist-wrapper {
-	min-height: 100%;
-}
-
-#playlist-banner {
-	height: 170px;
-  padding: 80px;
-	background: #0e0a0a;
-	background: -webkit-linear-gradient(left, #0e0a0a, #65151e);
-	background: -moz-linear-gradient(left, #0e0a0a, #65151e);
-	background: -ms-linear-gradient(left, #0e0a0a, #65151e);
-	background: -o-linear-gradient(left, #0e0a0a, #65151e);
-	background: linear-gradient(to right, #0e0a0a, #65151e);
-}
-
-
-
-#playlist-banner h1 {
-  padding-top: 80px;
-	font-family: 'Muli', sans-serif;
-	color: #fff;
-	font-size: 1.75em;
-}
-
-#playlist-banner h4 {
-	font-family: 'Muli', sans-serif;
-	color: #fff;
-	font-size: 1em;
-}
-
-#playlist-banner>p {
-	font-family: 'Muli', sans-serif;
-	color: #cdcdcd;
-	font-size: 0.75em;
-}
-
-#playlist-album-img {
-	height: 230px;
-	width: 230px;
-	position: absolute;
-	margin: 0;
-	top: 20%;
-	right: 10%;
-	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-#playlist-album-img img{
-	height: 100%;
-	width: 100%;
-}
-
-
+/* view for ipad*/
 @media screen and (max-width: 1056px) {
 
-  #playlist-album-img {
-  	height: 316px;
-  	width: 316px;
-  	position: absolute;
-  	margin: 0;
-    visibility: hidden;
-    margin-top: 100px;
-  	box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+  #playlist #playlist-banner #playlist-album-img {
+    height: 250px;
+    width: 250px;
+    position: relative;
+
+
+    right: 0;
+    margin: 0%;
+  }
+}
+
+/* view for mobile*/
+@media screen and (max-width: 412px) {
+  $banner-gradient-1st-color: #0e0a0a;
+  $banner-gradient-2nd-color: #6C237C;
+
+  $side-margin-size: 12%;
+  $side-margin-song-m: 0%;
+  $song-chart-height-margin: 10%;
+
+  $banner-height: 30%;
+
+  $album-img-dimension: 100px;
+
+#playlist {
+  
+  height: 100%;
+  width: 100%;
+  #playlist-banner {
+    position: relative;
+    height: $banner-height;
+    width: 100%;
+    background: none; /*take out later*/
+
+    margin-top: 15%;
+
+    border-bottom: 1px solid #eaeaea;
+
+
+    
+    #playlist-banner-text {
+      display: inline-block;
+      position: relative;
+      margin-left: $side-margin-size;
+      margin-right: $side-margin-size;
+
+      top: 50%;
+      transform: translateY(-50%);
+
+      h4,p {
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      h1 {
+        padding-top: 0px;
+        margin-top: 0px;
+        font-family: 'Muli', sans-serif;
+        color: #fff;
+        font-size: 1.75em;
+      }
+
+      h4 {
+        font-family: 'Muli', sans-serif;
+        color: #cdcdcd;
+        font-size: 1em;
+      }
+
+      p {
+        font-family: 'Muli', sans-serif;
+        color: #cdcdcd;
+        font-size: 0.75em;
+      }
+    }
+    #playlist-album-img {
+      display: inline-block;
+      height: $album-img-dimension;
+      width: $album-img-dimension;
+      position: absolute;
+      margin: 0;
+      top: 20%;
+      right: 10%;
+      box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+      background-color: #fff;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+
+
+
+
+    label {
+      margin: 0;
+      font-size: .75em;
+    }
+
+    }
+
+
   }
 
+  #songs-chart {
+    margin-top: $song-chart-height-margin;
+    margin-bottom: $song-chart-height-margin;
+    margin-left:  $side-margin-song-m;
+    margin-right: $side-margin-song-m;
 
-  #playlist-album-img img{
-  	height: 100%;
-  	width: 100%;
-    visibility: hidden;
+    table{
+      font-family: 'Muli', sans-serif;
+      width: 100%;
+      padding: 80px;
+      border-collapse: collapse;
+
+      thead{
+        border-bottom: 1.5px solid #000;
+
+        #add-song{
+            font-size: .75em;
+            float: right;
+            font-family: "Montserrat", Helvetica, sans-serif;
+            padding-right: 2em;
+
+            &:hover {
+              color: #636363;
+            }
+        }
+      }
+      th{
+        border-bottom: 2px solid #000;
+
+      }
+      th, td {
+        text-align: left;
+        padding-left: 1em;
+        padding-bottom: 10px;
+
+      }
+
+      tr td{
+        padding: 15px;
+        border-bottom: 1px solid #d2d2d2;
+        .songs-buttons {
+          float: right;
+          .song-btn {
+            margin-right: 25px;
+          }
+        }
+        #song-list-title {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+      }
+    }   
   }
-
-  #playlist-body{
-    visibility: hidden;
-    position: absolute;
-  }
-
-
+}
 }
 
 
-#playlist-body {
-	margin: 2% 10%;
-	width: 50%;
-}
 
-#playlist-body p {
-	font-family: 'Muli', sans-serif;
-	font-size: 0.75em;
-	font-weight: 200;
-}
 
-#playlist-album-img{
-  label {
-    margin: 0;
-    font-size: .75em;
-
-  }
-  input {
-
-  }
-}
 
 
 

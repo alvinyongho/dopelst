@@ -242,6 +242,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin v-center {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
 #playlist {
   padding-top: 62px;
 
