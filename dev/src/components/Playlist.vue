@@ -261,6 +261,7 @@ export default {
     },
     resetForms() {
       this.playlist = {
+        owner: firebase.auth().currentUser.uid,
         name: '',
         description: '',
         imageRef: '',

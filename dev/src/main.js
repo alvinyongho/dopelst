@@ -2,8 +2,8 @@
 
 import Vue from 'vue';
 import VueFire from 'vuefire';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';
+// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+// import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';
 import App from './App';
 import router from './router';
 
@@ -18,12 +18,14 @@ new Vue({
   components: { App },
 });
 
-if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+/*
+if ('serviceWorker' in navigator && (window.location.protocol === 'https:' ||
+window.location.hostname === 'localhost')) {
   window.addEventListener('load', () => {
     const registration = runtime.register({
       scope: '/',
       excludes: [
-        '**/*.hot-update.*', // Webpack HMR files
+
       ],
     });
 
@@ -54,3 +56,4 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
     });
   });
 }
+*/

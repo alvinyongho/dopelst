@@ -48,9 +48,12 @@ export default {
     },
   },
   created() {
+    this.$router.push({ path: '/' });
+    this.syncRoute(this.$route);
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.$router.push({ path: '/' });
+        this.$router.push({ path: '/playlist' });
       } else {
         this.$router.push({ path: '/login' });
       }
