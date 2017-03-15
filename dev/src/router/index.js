@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import Login from '@/components/Login';
 import Playlist from '@/components/Playlist';
 import PlaylistDetail from '@/components/Playlist-Detail';
+import Faq from '@/components/Faq';
 
 Vue.use(Router);
 
@@ -41,6 +42,18 @@ const router = new Router({
       meta: {
         title(params) {
           return `${params.name} | dopelst`;
+        },
+      },
+    },
+    {
+      path: '/faq',
+      name: 'FAQ',
+      component: Faq,
+      meta: {
+        title() {
+          console.log("hello");
+          return 'FAQ | dopelst';
+
         },
       },
     },
