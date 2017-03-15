@@ -7,9 +7,9 @@
         <p>Playlist · {{songs.length}} Songs</p>
       </div><!-- .songs-content -->
       <div id="playlist-album-img">
-        <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
+        <img v-bind:id="'playlist-img'" alt="playlist album cover" />
       </div><!-- #playlist-album-img -->
-    
+
     </div><!-- .playlist-banner -->
 
 
@@ -187,7 +187,7 @@ $side-margin-size: 12%;
 $song-chart-height-margin: 10%;
 
 #playlist {
-  
+
 
   #playlist-banner {
     position: relative;
@@ -202,12 +202,13 @@ $song-chart-height-margin: 10%;
     background: linear-gradient(to right, $banner-gradient-1st-color, $banner-gradient-2nd-color);
 
 
-    
+
     #playlist-banner-text {
       display: inline-block;
       position: relative;
       margin-left: $side-margin-size;
       margin-right: $side-margin-size;
+
 
       h4,p {
         margin: 0;
@@ -316,7 +317,14 @@ $song-chart-height-margin: 10%;
         }
 
       }
-    }   
+    }
+  }
+}
+
+
+@media screen and (min-width:1056px){
+  #playlist-banner-text{
+    margin-top: 25vh;
   }
 }
 
@@ -354,7 +362,7 @@ $song-chart-height-margin: 10%;
 
 
 #playlist {
-  
+
   height: 100%;
   width: 100%;
   #playlist-banner {
@@ -368,12 +376,13 @@ $song-chart-height-margin: 10%;
     border-bottom: 1px solid #eaeaea;
 
 
-    
+
     #playlist-banner-text {
       display: inline-block;
       position: relative;
       margin-left: $side-margin-size;
       margin-right: $side-margin-size;
+
 
       top: 50%;
       transform: translateY(-50%);
@@ -490,7 +499,7 @@ $song-chart-height-margin: 10%;
         }
 
       }
-    }   
+    }
   }
 }
 }
