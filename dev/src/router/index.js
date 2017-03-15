@@ -58,9 +58,7 @@ const router = new Router({
       component: Faq,
       meta: {
         title() {
-          console.log("hello");
           return 'FAQ | dopelst';
-
         },
       },
     },

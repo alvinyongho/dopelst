@@ -1,23 +1,25 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+  <div class="faq">
+		<section id="faq">
+			<h2>FAQ</h2>
+			<div class="question">
+				<h3>This is a sample question</h3>
+				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
+			</div><!-- .question -->
+			<div class="question">
+				<h3>This is a sample question</h3>
+				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
+			</div><!-- .question -->
+				<div class="question">
+				<h3>This is a sample question</h3>
+				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
+			</div><!-- .question -->
+				<div class="question">
+				<h3>This is a sample question</h3>
+				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
+			</div><!-- .question -->
+		</section><!-- #faq -->
+	</div><!--.faq-->
 </template>
 
 <script>
@@ -32,22 +34,52 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
+<style lang="scss" scoped>
+@mixin font-general {
+  font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+@mixin font-question {
+  font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+$navbar-height: 70px;
 
-a {
-  color: #42b983;
+#faq {
+  margin: 1em auto;
+  margin-top: $navbar-height + 20px;
+  width: 80%;
+
+  @include font-general;
+
+  h2 {
+    border-bottom: 1px solid rgb(156, 156, 156);
+    padding: 0.5em 0;
+
+    font-size: 2.5em;
+  }
+
+  .question {
+    border-bottom: 1px solid rgb(230, 230, 230);
+    padding: 1.5em 2em;
+
+    &:nth-last-child(-n+1) {
+      border: none;
+    }
+
+    h3 {
+      margin: 0;
+      margin-bottom: 2em;
+
+      color: rgb(135, 192, 245);
+    }
+
+    p {
+      margin: 0;
+
+      color: rgb(156, 156, 156);
+    }
+  }
+  
 }
 </style>
