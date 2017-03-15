@@ -45,7 +45,7 @@
         <tr v-for="song in songs">
           <!--  Song title and tags -->
           <td>
-            <span class ="songs-list-details"><a href="/song-details.html" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
+            <span class ="songs-list-details"><a v-bind:href="song.link" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
           </td>
           <td>
               <!-- Song buttons -->
