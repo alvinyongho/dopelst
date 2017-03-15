@@ -99,7 +99,7 @@ export default {
   margin: 0 auto;
   text-align: center;
   width: 50%;
-  height: 20.75em;
+  height: auto;
   background-color: #EDEDED;
 
   margin-top: 180px;

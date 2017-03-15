@@ -20,11 +20,12 @@
       <div v-show="!wantsToSignUp" class="clearfix btn-group">
         <button type="submit" class="signup-submit">Sign in</button><br>
         <button type="button" class="signup-button" v-on:click="wantsToSignUp = true">Don't have an account? <b> Sign up </b></button>
+        <button @click.prevent="doGmailLogin" class="signin-gmail">Sign in using Gmail</button>
+
       </div>
       <div v-show="wantsToSignUp">
         <button type="submit" class="signup-submit">Sign up</button><br>
         <button type="button" class="signin-button" v-on:click="wantsToSignUp = false">Already have account</button>
-
       </div>
     </form>
 
@@ -45,6 +46,18 @@
       };
     },
     methods: {
+      doGmailLogin() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+          .then((result) => {
+            this.onSignedIn();
+            return result;
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            this.errormsg = errorMessage;
+          });
+      },
       signUpWithPassword() {
         const email = this.email;
         const password = this.password;
@@ -162,7 +175,6 @@
 
     /*background: #DF1F17;*/
     border: none;
-    margin-bottom: 25px;
     /*color: white;*/
     /*box-shadow: 0 1px 0 0 rgba(94,126,184,0.50);*/
 
@@ -172,6 +184,7 @@
     margin-top: 25px;
     /*color: white;*/
     background: none;
+    margin-bottom: 25px;
 
   }
   .signin-submit{
@@ -197,7 +210,16 @@
     font-size: .8em;
     /*color: white;*/
     background: none;
+    margin-bottom: 25px;
 
+  }
+
+  .signin-gmail{
+    color: #F360AF;
+    font-size: .8em;
+    /*color: white;*/
+    background: none;
+    margin-bottom: 25px;
   }
 
 </style>
