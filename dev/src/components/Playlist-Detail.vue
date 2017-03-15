@@ -219,6 +219,8 @@ $song-chart-height-margin: 10%;
         font-family: 'Muli', sans-serif;
         color: #fff;
         font-size: 1.75em;
+        width: 100%;
+        word-wrap: break-word;
       }
 
       h4 {
@@ -333,9 +335,11 @@ $song-chart-height-margin: 10%;
 }
 
 /* view for mobile*/
-@media screen and (max-width: 412px) {
+@media screen and (max-width: 600px) {
   $banner-gradient-1st-color: #0e0a0a;
   $banner-gradient-2nd-color: #6C237C;
+
+  $banner-deets-color: #8e8e8e;
 
   $side-margin-size: 12%;
   $side-margin-song-m: 0%;
@@ -344,6 +348,10 @@ $song-chart-height-margin: 10%;
   $banner-height: 30%;
 
   $album-img-dimension: 100px;
+
+  $song-border-th-size: 1px;
+
+
 
 #playlist {
   
@@ -370,6 +378,8 @@ $song-chart-height-margin: 10%;
       top: 50%;
       transform: translateY(-50%);
 
+      width: 40%;
+
       h4,p {
         margin: 0;
         margin-bottom: 5px;
@@ -379,19 +389,23 @@ $song-chart-height-margin: 10%;
         padding-top: 0px;
         margin-top: 0px;
         font-family: 'Muli', sans-serif;
-        color: #fff;
-        font-size: 1.75em;
+        color: #000;
+        font-size: 1em;
+        width: 100%;
+        word-wrap: break-word;
       }
 
       h4 {
         font-family: 'Muli', sans-serif;
-        color: #cdcdcd;
+        color: $banner-deets-color;
         font-size: 1em;
+        width: 100%;
+        word-wrap: break-word;
       }
 
       p {
         font-family: 'Muli', sans-serif;
-        color: #cdcdcd;
+        color: $banner-deets-color;
         font-size: 0.75em;
       }
     }
@@ -403,7 +417,7 @@ $song-chart-height-margin: 10%;
       margin: 0;
       top: 20%;
       right: 10%;
-      box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+      box-shadow: none;
       background-color: #fff;
       img{
         height: 100%;
@@ -436,7 +450,7 @@ $song-chart-height-margin: 10%;
       border-collapse: collapse;
 
       thead{
-        border-bottom: 1.5px solid #000;
+        border-bottom: $song-border-th-size solid #000;
 
         #add-song{
             font-size: .75em;
