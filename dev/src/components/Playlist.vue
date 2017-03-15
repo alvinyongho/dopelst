@@ -6,9 +6,8 @@
         <a v-on:click="showCreateModal()">ADD PLAYLIST</a>
       </div><!-- #header -->
       <div id="playlist-grid">
-        <div class="playlist-element" v-for="(playlist, idx) in userPlaylists">
-          <!-- v-bind:src="playlist.imgurl" -->
-          <img v-bind:id="'playlist-img-' + idx" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
+        <div class="playlist-element" v-for="(playlist, i) in userPlaylists">
+          <img v-bind:id="'playlist-img-' + i" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
           <a class="playlist-name" v-on:click="openPlaylist(playlist)">{{playlist.name}}</a>
 
           <button v-on:click="removePlaylist(playlist)">Delete</button>

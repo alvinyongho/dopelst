@@ -8,6 +8,10 @@ import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEve
 import App from './App';
 import router from './router';
 
+/*
+ * Firebase App
+ */
+
 const config = {
   apiKey: 'AIzaSyAieH1g0trAjkHGDBbmuSV2iKPQXwTYz7Y',
   authDomain: 'dopelst-a697d.firebaseapp.com',
@@ -18,7 +22,10 @@ const config = {
 
 const firebaseApp = firebase.initializeApp(config);
 
-/* Vue App */
+
+/*
+ * Vue App
+ */
 
 Vue.config.productionTip = false;
 
@@ -36,7 +43,9 @@ new Vue({
 });
 
 
-/* Service Worker */
+/*
+ * Service Worker
+ */
 
 const swEnabled = false;
 
