@@ -7,6 +7,7 @@ import Login from '@/components/Login';
 import Playlist from '@/components/Playlist';
 import PlaylistDetail from '@/components/Playlist-Detail';
 import Faq from '@/components/Faq';
+import Team from '@/components/Team';
 
 Vue.use(Router);
 
@@ -59,6 +60,16 @@ const router = new Router({
       meta: {
         title() {
           return 'FAQ | dopelst';
+        },
+      },
+    },
+    {
+      path: '/team',
+      name: 'Team',
+      component: Team,
+      meta: {
+        title() {
+          return 'Team | dopelst';
         },
       },
     },

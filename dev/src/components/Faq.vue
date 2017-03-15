@@ -38,48 +38,35 @@ export default {
 @mixin font-general {
   font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 @mixin font-question {
   font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 $navbar-height: 70px;
-
 #faq {
   margin: 1em auto;
   margin-top: $navbar-height + 20px;
   width: 80%;
-
   @include font-general;
-
   h2 {
     border-bottom: 1px solid rgb(156, 156, 156);
     padding: 0.5em 0;
-
     font-size: 2.5em;
   }
-
   .question {
     border-bottom: 1px solid rgb(230, 230, 230);
     padding: 1.5em 2em;
-
     &:nth-last-child(-n+1) {
       border: none;
     }
-
     h3 {
       margin: 0;
       margin-bottom: 2em;
-
       color: rgb(135, 192, 245);
     }
-
     p {
       margin: 0;
-
       color: rgb(156, 156, 156);
     }
   }
-  
 }
 </style>

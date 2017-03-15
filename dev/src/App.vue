@@ -4,6 +4,8 @@
       <router-link to="/" v-show="!isLogin">HOME</router-link>
       <div class="spacer">&nbsp;</div>
       <div class="nav-link" v-show="!isLogin" v-on:click="logoutUser">LOGOUT</div>
+      <router-link to="/faq" class="nav-link" v-show="!isLogin">FAQ</router-link>
+      <router-link to="/team" class="nav-link" v-show="!isLogin">TEAM</router-link>
       <!--
       <router-link to="/bar" class="nav-link" v-show="!isLogin">BAR</router-link>
       <router-link to="/foo" class="nav-link" v-show="!isLogin">FOO</router-link>
@@ -79,7 +81,9 @@ body, html {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
+
+
 #app {
   height: 100%;
 }
@@ -101,8 +105,14 @@ nav a, nav div {
   display: inline-block;
   cursor: pointer;
 
+  font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.75em;
   color: #fff;
   text-decoration: none;
+}
+
+.nav-link:hover, nav a:hover {
+  font-weight: bold;
 }
 
 nav .nav-link {
