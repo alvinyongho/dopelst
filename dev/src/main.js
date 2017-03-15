@@ -2,13 +2,15 @@
 
 import Vue from 'vue';
 import VueFire from 'vuefire';
-// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-// import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';
 import App from './App';
 import router from './router';
 
-Vue.config.productionTip = false;
 
+/* Vue App */
+
+Vue.config.productionTip = false;
 Vue.use(VueFire);
 
 new Vue({
@@ -18,14 +20,24 @@ new Vue({
   components: { App },
 });
 
-/*
-if ('serviceWorker' in navigator && (window.location.protocol === 'https:' ||
-window.location.hostname === 'localhost')) {
+
+/* Service Worker */
+
+const swEnabled = false;
+
+if (
+  // Enable toggle
+  swEnabled &&
+  // SW support
+  'serviceWorker' in navigator &&
+  // HTTPS or localhost
+  (window.location.protocol === 'https:' || window.location.hostname === 'localhost')
+) {
   window.addEventListener('load', () => {
     const registration = runtime.register({
       scope: '/',
       excludes: [
-
+        '** /*.hot-update.*', // Webpack HMR files
       ],
     });
 
@@ -56,4 +68,3 @@ window.location.hostname === 'localhost')) {
     });
   });
 }
-*/

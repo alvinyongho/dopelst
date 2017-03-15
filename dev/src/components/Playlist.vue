@@ -51,8 +51,7 @@
 <script>
 import firebase from 'firebase';
 
-// eslint-disable-next-line
-import PlaylistModal from './elements/PlaylistModal.vue';
+import PlaylistModal from './elements/PlaylistModal';
 
 const config = {
   apiKey: 'AIzaSyAieH1g0trAjkHGDBbmuSV2iKPQXwTYz7Y',
@@ -67,9 +66,6 @@ const app = firebase.initializeApp(config);
 const db = app.database();
 const playlistsRef = db.ref('playlists');
 const playlistImagesRef = db.ref('playlistImages');
-
-// const storageRef = firebase.storage().ref();
-// const playlistImagesDir = 'playlistImages';
 
 export default {
   name: 'playlists',
@@ -202,49 +198,6 @@ export default {
         );
       });
       reader.readAsDataURL(this.currentImage);
-
-      /*
-      this.uploadingImage = true;
-
-      const targetFile = this.currentImage;
-      const filename = `${firebase.auth().currentUser.uid}_${Date.now()}_${targetFile.name}`;
-      const relativeUrl = `${playlistImagesDir}/${filename}`;
-      const uploadPathRef = storageRef.child(relativeUrl);
-
-      const uploadTask = uploadPathRef.put(targetFile);
-
-      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.uploadProgress = progress.toFixed(2);
-
-          switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED:
-              // eslint-disable-next-line
-              // console.log('Upload is paused');
-              break;
-            case firebase.storage.TaskState.RUNNING:
-              // eslint-disable-next-line
-              // console.log('Upload is running');
-              break;
-            default:
-              break;
-          }
-        },
-        (err) => {
-          // eslint-disable-next-line
-          console.error(err);
-
-          this.uploadingImage = false;
-        },
-        () => {
-          this.playlist.image = relativeUrl;
-          this.playlist.imgurl = uploadTask.snapshot.downloadURL;
-
-          cb();
-        },
-      );
-      */
     },
     showCreateModal() {
       this.createModalVisible = true;
