@@ -7,7 +7,7 @@
     </div><!-- .playlist-banner -->
 
     <div id="playlist-album-img">
-      <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
+      <img v-bind:id="'playlist-img'" alt="playlist album cover" />
 
 
     </div><!-- #playlist-album-img -->
@@ -70,6 +70,8 @@ import SongModal from './elements/SongModal';
 const db = firebase.database();
 const playlistsRef = db.ref('playlists');
 const songsRef = db.ref('songs');
+const playlistImagesRef = db.ref('playlistImages');
+
 // const playlistSingle = playlistsRef.orderByKey().equalTo(this.$route.params.id);
 
 export default {
@@ -97,7 +99,21 @@ export default {
       editModalVisible: false,
     };
   },
+  mounted() {
+    playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
+      const vals = snapshot.val();
+      if (vals) {
+        const valArray = Object.keys(vals).map(key => vals[key]);
 
+        this.$nextTick(() => {
+          const img = document.getElementById('playlist-img');
+          playlistImagesRef.child(valArray[0].imageRef).on('value', (playlistImageSnapshot) => {
+            img.src = playlistImageSnapshot.val();
+          });
+        });
+      }
+    });
+  },
   methods: {
     createSong() {
       if (this.song.name.trim() &&
