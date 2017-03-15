@@ -4,6 +4,8 @@
       <router-link to="/" v-show="!isLogin">HOME</router-link>
       <div class="spacer">&nbsp;</div>
       <div class="nav-link" v-show="!isLogin" v-on:click="logoutUser">LOGOUT</div>
+      <router-link to="/faq" class="nav-link" v-show="!isLogin">FAQ</router-link>
+      <router-link to="/team" class="nav-link" v-show="!isLogin">TEAM</router-link>
       <!--
       <router-link to="/bar" class="nav-link" v-show="!isLogin">BAR</router-link>
       <router-link to="/foo" class="nav-link" v-show="!isLogin">FOO</router-link>
@@ -15,17 +17,6 @@
 
 <script>
 import firebase from 'firebase';
-
-// const config = {
-//   apiKey: 'AIzaSyAieH1g0trAjkHGDBbmuSV2iKPQXwTYz7Y',
-//   authDomain: 'dopelst-a697d.firebaseapp.com',
-//   databaseURL: 'https://dopelst-a697d.firebaseio.com',
-//   storageBucket: 'dopelst-a697d.appspot.com',
-//   messagingSenderId: '492354135751',
-// };
-
-// const app = firebase.initializeApp(config);
-// const db = app.database();
 
 export default {
   name: 'app',
@@ -79,7 +70,9 @@ body, html {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
+
+
 #app {
   height: 100%;
 }
@@ -101,8 +94,14 @@ nav a, nav div {
   display: inline-block;
   cursor: pointer;
 
+  font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.75em;
   color: #fff;
   text-decoration: none;
+}
+
+.nav-link:hover, nav a:hover {
+  font-weight: bold;
 }
 
 nav .nav-link {

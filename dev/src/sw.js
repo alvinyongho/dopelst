@@ -34,7 +34,7 @@ self.addEventListener('install', (event) => {
       .then(() => debug('log', 'Install: Cached webpack assets', assetsToCache))
       .then(() => self.skipWaiting())
       .catch((err) => {
-        debug('error', err);
+        debug('error', 'Install: Cache error', err);
         throw err;
       }),
   );
@@ -63,7 +63,7 @@ self.addEventListener('activate', (event) => {
       .then(() => self.clients.claim())
       .then(() => debug('log', 'Activate: Claimed clients'))
       .catch((err) => {
-        debug('error', err);
+        debug('error', 'Activate: Cache delete error', err);
         throw err;
       }),
   );
@@ -84,7 +84,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   if (url.origin !== location.origin) {
-    debug('log', `Fetch: Ignore cross-origin request ${url.origin}`)
+    debug('log', `Fetch: Ignore cross-origin request ${url.origin}`);
     return;
   }
 
@@ -92,7 +92,7 @@ self.addEventListener('fetch', (event) => {
     .then((res) => {
       // Found in cache
       if (res) {
-        debug('log', `Fetch: Fetched ${url.href} from cache`)
+        debug('log', `Fetch: Fetched ${url.href} from cache`);
         return res;
       }
 
@@ -113,21 +113,18 @@ self.addEventListener('fetch', (event) => {
           debug('log', `Fetch: ${url.href} fetched`);
 
           // Clone + Store response in cache
-          const resCache = networkRes.clone();
+          const cacheRes = networkRes.clone();
           global.caches
             .open(CACHE_NAME)
-            .then((cache) => {
-              return cache.put(request, resCache);
-            })
+            .then(cache => cache.put(request, cacheRes))
             .then(() => debug('log', `Fetch: ${url.href} cached`));
 
           return networkRes;
         })
         .catch((err) => {
-          debug('log', `Fetch: Fetch API error`);
-
-          return;
-        })
+          debug('error', 'Fetch: Fetch API error', err);
+          throw err;
+        });
     });
 
   event.respondWith(resource);
