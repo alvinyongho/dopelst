@@ -78,6 +78,9 @@ Our application has a web app manifest located at /static/manifest.json. In conj
 ## Credit
 
 #### Development Team
+
 [Alvin Ho](https://github.com/alvinyongho)
+
 [Lauren Liu](https://github.com/lmliu)
+
 [David Luu](https://github.com/davidcluu) - [Website](https://davidluu.me/)
