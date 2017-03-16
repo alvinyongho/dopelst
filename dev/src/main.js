@@ -1,7 +1,7 @@
 /* eslint-disable no-new */
 
 import Vue from 'vue';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import VueFire from 'vuefire';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';

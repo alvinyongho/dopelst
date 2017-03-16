@@ -180,7 +180,7 @@ export default {
       this.imageUnchanged = false;
     },
     uploadImage(cb) {
-      this.uploadingImage = true;
+      this.uploadingImage = false; // true;
 
       const reader = new FileReader();
       reader.addEventListener('load', () => {

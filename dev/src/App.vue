@@ -6,17 +6,14 @@
       <div class="nav-link" v-show="!isLogin" v-on:click="logoutUser">LOGOUT</div>
       <router-link to="/faq" class="nav-link" v-show="!isLogin">FAQ</router-link>
       <router-link to="/team" class="nav-link" v-show="!isLogin">TEAM</router-link>
-      <!--
-      <router-link to="/bar" class="nav-link" v-show="!isLogin">BAR</router-link>
-      <router-link to="/foo" class="nav-link" v-show="!isLogin">FOO</router-link>
-      -->
     </nav>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default {
   name: 'app',
