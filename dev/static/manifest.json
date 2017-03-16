@@ -1,0 +1,10 @@
+{
+  "name": "dopelst",
+  "short_name": "dopelst",
+  "theme_color": "#6a1d7a",
+  "background_color": "#6a1d7a",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/"
+}

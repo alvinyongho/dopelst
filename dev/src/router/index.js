@@ -47,7 +47,7 @@ const router = new Router({
       component: Playlist,
       meta: {
         title() {
-          return 'Playlist | dopelst';
+          return 'Playlists | dopelst';
         },
       },
     },

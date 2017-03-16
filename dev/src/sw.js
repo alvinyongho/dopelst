@@ -35,7 +35,7 @@ self.addEventListener('install', (event) => {
       .then(() => self.skipWaiting())
       .catch((err) => {
         debug('error', 'Install: Cache error', err);
-        throw err;
+        // throw err;
       }),
   );
 });
@@ -64,7 +64,7 @@ self.addEventListener('activate', (event) => {
       .then(() => debug('log', 'Activate: Claimed clients'))
       .catch((err) => {
         debug('error', 'Activate: Cache delete error', err);
-        throw err;
+        // throw err;
       }),
   );
 });
@@ -123,7 +123,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch((err) => {
           debug('error', 'Fetch: Fetch API error', err);
-          throw err;
+          // throw err;
         });
     });
 
