@@ -5,9 +5,16 @@ import firebase from 'firebase';
 import Index from '@/components/Index';
 import Login from '@/components/Login';
 import Playlist from '@/components/Playlist';
-import PlaylistDetail from '@/components/Playlist-Detail';
-import Faq from '@/components/Faq';
-import Team from '@/components/Team';
+// import PlaylistDetail from '@/components/Playlist-Detail';
+// import Faq from '@/components/Faq';
+// import Team from '@/components/Team';
+
+// const Index = () => System.import('@/components/Index');
+// const Login = () => System.import('@/components/Login');
+// const Playlist = () => System.import('@/components/Playlist');
+const PlaylistDetail = () => System.import('@/components/Playlist-Detail');
+const Faq = () => System.import('@/components/Faq');
+const Team = () => System.import('@/components/Team');
 
 Vue.use(Router);
 

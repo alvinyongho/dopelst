@@ -6,9 +6,8 @@
         <a v-on:click="showCreateModal()">ADD PLAYLIST</a>
       </div><!-- #header -->
       <div id="playlist-grid">
-        <div class="playlist-element" v-for="(playlist, idx) in userPlaylists">
-          <!-- v-bind:src="playlist.imgurl" -->
-          <img v-bind:id="'playlist-img-' + idx" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
+        <div class="playlist-element" v-for="(playlist, i) in userPlaylists">
+          <img v-bind:id="'playlist-img-' + i" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
           <a class="playlist-name" v-on:click="openPlaylist(playlist)">{{playlist.name}}</a>
 
           <button v-on:click="removePlaylist(playlist)">Delete</button>
@@ -49,23 +48,7 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-
 import PlaylistModal from './elements/PlaylistModal';
-
-const config = {
-  apiKey: 'AIzaSyAieH1g0trAjkHGDBbmuSV2iKPQXwTYz7Y',
-  authDomain: 'dopelst-a697d.firebaseapp.com',
-  databaseURL: 'https://dopelst-a697d.firebaseio.com',
-  storageBucket: 'dopelst-a697d.appspot.com',
-  messagingSenderId: '492354135751',
-};
-
-const app = firebase.initializeApp(config);
-
-const db = app.database();
-const playlistsRef = db.ref('playlists');
-const playlistImagesRef = db.ref('playlistImages');
 
 export default {
   name: 'playlists',
@@ -74,12 +57,19 @@ export default {
   },
   firebase() {
     return {
-      playlistsRef,
-      userPlaylists: playlistsRef.orderByChild('owner').equalTo(firebase.auth().currentUser.uid),
+      userPlaylists: this.playlistsRef.orderByChild('owner').equalTo(this.firebase.auth().currentUser.uid),
     };
   },
   data() {
+    const firebase = this.$root.$data.firebase;
+    const firebaseApp = this.$root.$data.firebaseApp;
+    const db = firebaseApp.database();
+
     return {
+      firebase,
+      firebaseApp,
+      playlistsRef: db.ref('playlists'),
+      playlistImagesRef: db.ref('playlistImages'),
       playlist: {
         owner: firebase.auth().currentUser.uid,
         name: '',
@@ -95,9 +85,9 @@ export default {
     };
   },
   mounted() {
-    playlistsRef
+    this.playlistsRef
       .orderByChild('owner')
-      .equalTo(firebase.auth().currentUser.uid)
+      .equalTo(this.firebase.auth().currentUser.uid)
       .on('value', (playlistsSnapshot) => {
         const playlists = playlistsSnapshot.val();
         if (playlists) {
@@ -105,7 +95,7 @@ export default {
           valArray.forEach((val, i) => {
             this.$nextTick(() => {
               const img = document.getElementById(`playlist-img-${i}`);
-              playlistImagesRef
+              this.playlistImagesRef
                 .child(val.imageRef)
                 .on('value', (playlistImageSnapshot) => {
                   img.src = playlistImageSnapshot.val();
@@ -119,7 +109,7 @@ export default {
     createPlaylist() {
       if (this.playlist.name.trim() && this.playlist.description.trim()) {
         this.uploadImage(() => {
-          playlistsRef.push(this.playlist).then(
+          this.playlistsRef.push(this.playlist).then(
             () => {
               this.uploadingImage = false;
               this.closeModal();
@@ -137,7 +127,7 @@ export default {
         const key = this.playlist['.key'];
 
         if (this.imageUnchanged) {
-          playlistsRef.child(key).update({
+          this.playlistsRef.child(key).update({
             owner: this.playlist.owner,
             name: this.playlist.name,
             description: this.playlist.description,
@@ -150,7 +140,7 @@ export default {
           );
         } else {
           this.uploadImage(() => {
-            playlistsRef.child(key).update({
+            this.playlistsRef.child(key).update({
               owner: this.playlist.owner,
               name: this.playlist.name,
               description: this.playlist.description,
@@ -170,7 +160,7 @@ export default {
       }
     },
     removePlaylist(playlist) {
-      playlistsRef.child(playlist['.key']).remove();
+      this.playlistsRef.child(playlist['.key']).remove();
     },
     openPlaylist(playlist) {
       this.$router.push({
@@ -194,7 +184,7 @@ export default {
 
       const reader = new FileReader();
       reader.addEventListener('load', () => {
-        playlistImagesRef.push(reader.result).then(
+        this.playlistImagesRef.push(reader.result).then(
           (snapshot) => {
             this.playlist.imageRef = snapshot.key;
 
@@ -225,7 +215,7 @@ export default {
     },
     resetForms() {
       this.playlist = {
-        owner: firebase.auth().currentUser.uid,
+        owner: this.firebase.auth().currentUser.uid,
         name: '',
         description: '',
         imageRef: '',

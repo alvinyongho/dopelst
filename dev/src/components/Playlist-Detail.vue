@@ -2,14 +2,16 @@
   <div id="playlist">
     <div id="playlist-banner">
       <div class="songs-content" id="playlist-banner-text">
-        <h1>{{playlist[0].name}}</h1>
-        <h4>{{playlist[0].description}}</h4>
+        <div v-for="(list, i) in playlist" v-if="i === 0"><!-- list = playlist[0] -->
+          <h1>{{list.name}}</h1>
+          <h4>{{list.description}}</h4>
+        </div>
         <p>Playlist · {{songs.length}} Songs</p>
       </div><!-- .songs-content -->
       <div id="playlist-album-img">
-        <img v-bind:src="playlist[0].imgurl" alt="playlist album cover" />
+        <img v-bind:id="'playlist-img'" alt="playlist album cover" />
       </div><!-- #playlist-album-img -->
-    
+
     </div><!-- .playlist-banner -->
 
 
@@ -45,7 +47,7 @@
         <tr v-for="song in songs">
           <!--  Song title and tags -->
           <td>
-            <span class ="songs-list-details"><a href="/song-details.html" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
+            <span class ="songs-list-details"><a v-bind:href="song.link" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
           </td>
           <td>
               <!-- Song buttons -->
@@ -65,13 +67,7 @@
 
 
 <script>
-import firebase from 'firebase';
 import SongModal from './elements/SongModal';
-
-const db = firebase.database();
-const playlistsRef = db.ref('playlists');
-const songsRef = db.ref('songs');
-const playlistImagesRef = db.ref('playlistImages');
 
 // const playlistSingle = playlistsRef.orderByKey().equalTo(this.$route.params.id);
 
@@ -80,16 +76,21 @@ export default {
   components: { SongModal },
   firebase() {
     return {
-      playlist: {
-        source: playlistsRef.orderByKey().equalTo(this.$route.params.id),
-      },
-      songs: {
-        source: songsRef.orderByChild('playlist').equalTo(this.$route.params.id),
-      },
+      playlist: this.playlistsRef.orderByKey().equalTo(this.$route.params.id),
+      songs: this.songsRef.orderByChild('playlist').equalTo(this.$route.params.id),
     };
   },
   data() {
+    const firebase = this.$root.$data.firebase;
+    const firebaseApp = this.$root.$data.firebaseApp;
+    const db = firebaseApp.database();
+
     return {
+      firebase,
+      firebaseApp,
+      playlistsRef: db.ref('playlists'),
+      songsRef: db.ref('songs'),
+      playlistImagesRef: db.ref('playlistImages'),
       song: {
         name: '',
         artist: '',
@@ -101,14 +102,14 @@ export default {
     };
   },
   mounted() {
-    playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
+    this.playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
       const vals = snapshot.val();
       if (vals) {
         const valArray = Object.keys(vals).map(key => vals[key]);
 
         this.$nextTick(() => {
           const img = document.getElementById('playlist-img');
-          playlistImagesRef.child(valArray[0].imageRef).on('value', (playlistImageSnapshot) => {
+          this.playlistImagesRef.child(valArray[0].imageRef).on('value', (playlistImageSnapshot) => {
             img.src = playlistImageSnapshot.val();
           });
         });
@@ -120,7 +121,7 @@ export default {
       if (this.song.name.trim() &&
           this.song.artist.trim() &&
           this.song.link.trim()) {
-        songsRef.push(this.song);
+        this.songsRef.push(this.song);
         this.song.name = '';
         this.song.artist = '';
         this.song.link = '';
@@ -133,7 +134,7 @@ export default {
       if (this.song.name.trim() && this.song.artist.trim()) {
         const key = this.song['.key'];
 
-        songsRef.child(key).update({
+        this.songsRef.child(key).update({
           name: this.song.name,
           artist: this.song.artist,
           link: this.song.link,
@@ -157,7 +158,7 @@ export default {
       this.createModalVisible = true;
     },
     removeSong(song) {
-      songsRef.child(song['.key']).remove();
+      this.songsRef.child(song['.key']).remove();
     },
     closeModal() {
       this.createModalVisible = false;
@@ -187,7 +188,7 @@ $side-margin-size: 12%;
 $song-chart-height-margin: 10%;
 
 #playlist {
-  
+
 
   #playlist-banner {
     position: relative;
@@ -202,12 +203,13 @@ $song-chart-height-margin: 10%;
     background: linear-gradient(to right, $banner-gradient-1st-color, $banner-gradient-2nd-color);
 
 
-    
+
     #playlist-banner-text {
       display: inline-block;
       position: relative;
       margin-left: $side-margin-size;
       margin-right: $side-margin-size;
+
 
       h4,p {
         margin: 0;
@@ -316,7 +318,14 @@ $song-chart-height-margin: 10%;
         }
 
       }
-    }   
+    }
+  }
+}
+
+
+@media screen and (min-width:1056px){
+  #playlist-banner-text{
+    margin-top: 25vh;
   }
 }
 
@@ -354,7 +363,7 @@ $song-chart-height-margin: 10%;
 
 
 #playlist {
-  
+
   height: 100%;
   width: 100%;
   #playlist-banner {
@@ -368,12 +377,13 @@ $song-chart-height-margin: 10%;
     border-bottom: 1px solid #eaeaea;
 
 
-    
+
     #playlist-banner-text {
       display: inline-block;
       position: relative;
       margin-left: $side-margin-size;
       margin-right: $side-margin-size;
+
 
       top: 50%;
       transform: translateY(-50%);
@@ -490,7 +500,7 @@ $song-chart-height-margin: 10%;
         }
 
       }
-    }   
+    }
   }
 }
 }

@@ -1,16 +1,34 @@
 /* eslint-disable no-new */
 
 import Vue from 'vue';
+import firebase from 'firebase';
 import VueFire from 'vuefire';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import registerEvents from 'serviceworker-webpack-plugin/lib/browser/registerEvents';
 import App from './App';
 import router from './router';
 
+/*
+ * Firebase App
+ */
 
-/* Vue App */
+const config = {
+  apiKey: 'AIzaSyAieH1g0trAjkHGDBbmuSV2iKPQXwTYz7Y',
+  authDomain: 'dopelst-a697d.firebaseapp.com',
+  databaseURL: 'https://dopelst-a697d.firebaseio.com',
+  storageBucket: 'dopelst-a697d.appspot.com',
+  messagingSenderId: '492354135751',
+};
+
+const firebaseApp = firebase.initializeApp(config);
+
+
+/*
+ * Vue App
+ */
 
 Vue.config.productionTip = false;
+
 Vue.use(VueFire);
 
 new Vue({
@@ -18,10 +36,16 @@ new Vue({
   router,
   template: '<App/>',
   components: { App },
+  data: {
+    firebase,
+    firebaseApp,
+  },
 });
 
 
-/* Service Worker */
+/*
+ * Service Worker
+ */
 
 const swEnabled = false;
 

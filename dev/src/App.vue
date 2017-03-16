@@ -35,7 +35,7 @@ export default {
     },
     syncRoute(route) {
       this.isLogin = (route.path === '/login');
-      document.title = route.meta.title(route.params);
+      document.title = (route.meta.title && route.meta.title(route.params)) || 'dopelst';
     },
   },
   created() {
