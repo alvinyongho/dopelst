@@ -38,8 +38,8 @@
     <div id="songs-chart">
       <table>
         <thead>
-          <th>SONGS</th>
-          <th><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
+          <th id="chart-title">SONGS</th>
+          <th id="chart-add-desktop"><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
           <!-- use the modal component, pass in the prop -->
         </thead>
 
@@ -47,13 +47,28 @@
         <tr v-for="song in songs">
           <!--  Song title and tags -->
           <td>
-            <span class ="songs-list-details"><a v-bind:href="song.link" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
+            <span class ="songs-list-details" id="song-details-desktop"><a v-bind:href="song.link" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
+            <span class ="songs-list-details" id="song-details-mobile">
+              <a href="/song-details.html" id="song-list-title">{{song.name}} </a> 
+              <br>
+             <span id="song-list-artist">{{song.artist}}</span>
+            </span>
           </td>
           <td>
               <!-- Song buttons -->
               <div class="songs-buttons">
-                <a @click.prevent="showEditModal(song)" class="song-btn">Edit</a>
-                <a v-on:click="removeSong(song)">Delete</a>
+                <a @click.prevent="showEditModal(song)" class="song-btn" id="sb-d">
+                  <img src="../assets/edit.png" alt="Edit" />
+                </a>
+                <a v-on:click="removeSong(song)" class ="song-btn" id="sb-d">
+                  <img src="../assets/delete.png" alt="Delete" />
+                </a>
+                <a @click.prevent="showEditModal(song)" class="song-btn" id="sb-m">
+                  <img src="../assets/m-edit.png" alt="Edit" />
+                </a>
+                <a v-on:click="removeSong(song)" class ="song-btn" id="sb-m">
+                  <img src="../assets/m-delete.png" alt="Delete" />
+                </a>
             </div><!-- #song-btn-wrapper -->
           </td>
         </tr> <!-- End of single entry -->
@@ -293,8 +308,8 @@ $song-chart-height-margin: 10%;
       }
       th{
         border-bottom: 2px solid #000;
-
       }
+
       th, td {
         text-align: left;
         padding-left: 1em;
@@ -309,12 +324,21 @@ $song-chart-height-margin: 10%;
           float: right;
           .song-btn {
             margin-right: 25px;
+            img {
+              height: 16px;
+            }
+          }
+          #sb-m {
+            display: none;
           }
         }
         #song-list-title {
             text-decoration: none;
             color: #000;
             font-weight: bold;
+        }
+        #song-details-mobile {
+          display: none;
         }
 
       }
@@ -345,6 +369,7 @@ $song-chart-height-margin: 10%;
 
 /* view for mobile*/
 @media screen and (max-width: 600px) {
+  $playlist-background-color: #161616;
   $banner-gradient-1st-color: #0e0a0a;
   $banner-gradient-2nd-color: #6C237C;
 
@@ -354,7 +379,10 @@ $song-chart-height-margin: 10%;
   $side-margin-song-m: 0%;
   $song-chart-height-margin: 10%;
 
+  $song-chart-font-color: #fff;
+
   $banner-height: 30%;
+  $song-char-min-height: 100%-$banner-height;
 
   $album-img-dimension: 100px;
 
@@ -362,7 +390,9 @@ $song-chart-height-margin: 10%;
 
 
 
+
 #playlist {
+  background-color: $playlist-background-color;
 
   height: 100%;
   width: 100%;
@@ -373,8 +403,6 @@ $song-chart-height-margin: 10%;
     background: none; /*take out later*/
 
     margin-top: 15%;
-
-    border-bottom: 1px solid #eaeaea;
 
 
 
@@ -399,7 +427,7 @@ $song-chart-height-margin: 10%;
         padding-top: 0px;
         margin-top: 0px;
         font-family: 'Muli', sans-serif;
-        color: #000;
+        color: #fff;
         font-size: 1em;
         width: 100%;
         word-wrap: break-word;
@@ -435,8 +463,6 @@ $song-chart-height-margin: 10%;
       }
 
 
-
-
     label {
       margin: 0;
       font-size: .75em;
@@ -448,10 +474,19 @@ $song-chart-height-margin: 10%;
   }
 
   #songs-chart {
-    margin-top: $song-chart-height-margin;
-    margin-bottom: $song-chart-height-margin;
+    background-color: black;
+
+    /** ADD */
+    padding-top: $song-chart-height-margin/2;
+    margin-top: 0;
+
+    margin-bottom: 0;
     margin-left:  $side-margin-song-m;
     margin-right: $side-margin-song-m;
+
+    min-height: $song-char-min-height; /* ADDD */
+
+    color: $song-chart-font-color;
 
     table{
       font-family: 'Muli', sans-serif;
@@ -460,8 +495,7 @@ $song-chart-height-margin: 10%;
       border-collapse: collapse;
 
       thead{
-        border-bottom: $song-border-th-size solid #000;
-
+        border-bottom: 1px solid rgba(255,255,255,0.1);
         #add-song{
             font-size: .75em;
             float: right;
@@ -474,9 +508,16 @@ $song-chart-height-margin: 10%;
         }
       }
       th{
-        border-bottom: 2px solid #000;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        font-size: 0.75em;
+        color: rgba(255,255,255,0.5);
 
       }
+      /*ADDED*/
+      th#chart-title {
+        font-weight: 300; 
+      }
+
       th, td {
         text-align: left;
         padding-left: 1em;
@@ -485,18 +526,42 @@ $song-chart-height-margin: 10%;
       }
 
       tr td{
+        border-bottom: 1px solid rgba(175, 175, 175,0.1);
         padding: 15px;
-        border-bottom: 1px solid #d2d2d2;
         .songs-buttons {
           float: right;
           .song-btn {
             margin-right: 25px;
+            img {
+              height: 16px;
+            }
+          }
+          #sb-m {
+            display: inline-block;
+            opacity: 0.75;
+          }
+          #sb-d {
+            display: none;
           }
         }
         #song-list-title {
             text-decoration: none;
-            color: #000;
+            color: #fff;
             font-weight: bold;
+        }
+
+        #song-details-mobile {
+          display: block;
+
+          /*styling*/
+          font-size: 0.75em;
+          #song-list-artist{
+            color: rgba(255,255,255,0.5);
+          }
+        }
+
+        #song-details-desktop {
+          display: none;
         }
 
       }
