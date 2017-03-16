@@ -36,8 +36,12 @@ Users can delete their Playlists by clicking the delete icon under the playlist 
 
 ### Asset Management
 
+We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features).
 
 
+## Code Organization/Architecture
+
+We organized our codebase around the features provided by Webpack and Vue. In particular, we wrote most of our application within [Vue single file components](https://vuejs.org/v2/guide/single-file-components.html). Doing this allowed us to keep the relevant HTML templates, CSS, JS in the same file. We used a slightly customized version of [Vue's suggested webpack boilerplate](https://github.com/vuejs-templates/webpack), which sped up the development cycle by allowing us to develop with hot module replacement while keeping the production build process simple and quick.
 
 ## PWA Features
 
@@ -64,4 +68,8 @@ Our application utilizes a service worker to enable the application to be used o
 
 ### Web Manifest
 
-TODO
+Our application has a web app manifest located at /static/manifest.json. In conjunction with having a Service Worker, this allows a user to install the application onto their device, giving them a native app experience.
+
+## Todo
+
+## Credit
