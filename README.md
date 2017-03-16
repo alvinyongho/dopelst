@@ -1,6 +1,6 @@
 # dopelst
 
-> Currently hosted at TODO
+> Currently hosted at https://dopelst-a697d.firebaseapp.com
 
 [![Vue.js v2.2.2](https://img.shields.io/badge/Vue.js-2.2.2-brightgreen.svg?style=flat-square)](https://vuejs.org/)
 
