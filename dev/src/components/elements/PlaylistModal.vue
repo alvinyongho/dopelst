@@ -15,12 +15,7 @@
               <div>
                 <input type="submit" v-on:submit.prevent="playlistAction" v-bind:value="name" />
               </div>
-              <div class="progress-container">
-                &nbsp;
-                <div class="progress-bar pos" v-show="uploadingImage" v-bind:style="{ width: uploadProgress + '%' }"></div>
-                <div class="progress-bar neg" v-show="uploadingImage" v-bind:style="{ width: (100 - uploadProgress) + '%' }"></div>
-                <div class="progress-text" v-show="uploadingImage">{{uploadProgress}}%</div>
-              </div>
+              <div class="modal-error" v-show="modalError">Error: {{modalError}}</div><!-- .modal-error -->
             </form>
             <button class="modal-cancel" v-bind:id="rootId + '-modal-cancel'" v-on:click="closeModal">Cancel</button>
           </div><!-- .modal-body -->
@@ -39,9 +34,8 @@ export default {
     'playlist',
     'currentImage',
     'imageUnchanged',
-    'uploadingImage',
-    'uploadProgress',
     'modalVisible',
+    'modalError',
 
     'closeModal',
     'playlistAction',
@@ -79,40 +73,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal .progress-container {
-  position: relative;
-
-  .progress-bar {
-    height: 18px;
-
-    position: absolute;
-    top: 0;
-
-    text-align: center;
-
-    &.pos {
-      left: 0;
-
-      background-color: #46a805;
-    }
-
-    &.neg {
-      right: 0;
-
-      background-color: #a80e05;
-    }
-  }
-
-  .progress-text {
-    width: 100%;
-    
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    text-align: center;
-    color: #fff;
-  }
+.modal-error {
+  color: red;
 }
 
 .modal-label {

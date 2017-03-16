@@ -21,9 +21,8 @@
 
       v-bind:playlist="playlist"
       v-bind:currentImage="currentImage"
-      v-bind:uploadingImage="uploadingImage"
-      v-bind:uploadProgress="uploadProgress"
       v-bind:modalVisible="createModalVisible"
+      v-bind:modalError="modalError"
 
       v-bind:closeModal="closeModal"
       v-bind:playlistAction="createPlaylist"
@@ -36,9 +35,8 @@
       v-bind:playlist="playlist"
       v-bind:currentImage="currentImage"
       v-bind:imageUnchanged="imageUnchanged"
-      v-bind:uploadingImage="uploadingImage"
-      v-bind:uploadProgress="uploadProgress"
       v-bind:modalVisible="editModalVisible"
+      v-bind:modalError="modalError"
 
       v-bind:closeModal="closeModal"
       v-bind:playlistAction="editPlaylist"
@@ -49,6 +47,7 @@
 
 <script>
 import PlaylistModal from './elements/PlaylistModal';
+import ImageTools from './helpers/ImageTools';
 
 export default {
   name: 'playlists',
@@ -78,10 +77,9 @@ export default {
       },
       currentImage: {},
       imageUnchanged: true,
-      uploadingImage: false,
-      uploadProgress: 0,
       createModalVisible: false,
       editModalVisible: false,
+      modalError: '',
     };
   },
   mounted() {
@@ -107,11 +105,10 @@ export default {
   },
   methods: {
     createPlaylist() {
-      if (this.playlist.name.trim() && this.playlist.description.trim()) {
+      if (this.playlist.name.trim() && this.playlist.description.trim() && this.currentImage.name) {
         this.uploadImage(() => {
           this.playlistsRef.push(this.playlist).then(
             () => {
-              this.uploadingImage = false;
               this.closeModal();
             },
             (err) => {
@@ -120,10 +117,12 @@ export default {
             },
           );
         });
+      } else {
+        this.modalError = 'Playlist must have a name, description, and image!';
       }
     },
     editPlaylist() {
-      if (this.playlist.name.trim() && this.playlist.description.trim()) {
+      if (this.playlist.name.trim() && this.playlist.description.trim() && this.currentImage.name) {
         const key = this.playlist['.key'];
 
         if (this.imageUnchanged) {
@@ -147,7 +146,6 @@ export default {
               imageRef: this.playlist.imageRef,
             }).then(
               () => {
-                this.uploadingImage = false;
                 this.closeModal();
               },
               (err) => {
@@ -157,6 +155,8 @@ export default {
             );
           });
         }
+      } else {
+        this.modalError = 'Playlist must have a name, description, and image!';
       }
     },
     removePlaylist(playlist) {
@@ -180,11 +180,8 @@ export default {
       this.imageUnchanged = false;
     },
     uploadImage(cb) {
-      this.uploadingImage = false; // true;
-
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        this.playlistImagesRef.push(reader.result).then(
+      const pushImage = (img) => {
+        this.playlistImagesRef.push(img).then(
           (snapshot) => {
             this.playlist.imageRef = snapshot.key;
 
@@ -193,12 +190,22 @@ export default {
           (err) => {
             // eslint-disable-next-line
             console.error(err);
-
-            this.uploadingImage = false;
           },
         );
+      };
+
+      ImageTools.resize(this.currentImage, {
+        width: 250,
+        height: 250,
+      }, (res, success) => {
+        if (success) {
+          pushImage(res);
+        } else {
+          const reader = new FileReader();
+          reader.addEventListener('load', () => pushImage(reader.result));
+          reader.readAsDataURL(this.currentImage);
+        }
       });
-      reader.readAsDataURL(this.currentImage);
     },
     showCreateModal() {
       this.createModalVisible = true;
@@ -223,7 +230,7 @@ export default {
 
       this.currentImage = {};
       this.imageUnchanged = true;
-      this.uploadProgress = 0;
+      this.modalError = '';
 
       Array.prototype.slice.call(document.forms).forEach(form => form.reset());
     },
