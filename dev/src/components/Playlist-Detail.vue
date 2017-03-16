@@ -398,7 +398,7 @@ $song-chart-height-margin: 10%;
       h4 {
         font-family: 'Muli', sans-serif;
         color: $banner-deets-color;
-        font-size: 1em;
+        font-size: 0.80em;
         width: 100%;
         word-wrap: break-word;
       }
