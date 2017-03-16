@@ -72,15 +72,6 @@ export default {
   created() {
     this.$router.push({ path: '/' });
     this.syncRoute(this.$route);
-
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$router.push({ path: '/playlist' });
-      } else {
-        this.$router.push({ path: '/login' });
-      }
-      this.syncRoute(this.$route);
-    });
   },
   watch: {
     $route(to) { // (to,from)
@@ -138,6 +129,8 @@ nav a, nav div {
 nav #nav-logo {
   height: 2em;
   padding: 1em;
+
+  cursor: pointer;
 }
 
 nav a#nav-logo {
@@ -158,6 +151,13 @@ nav .spacer {
 
 nav#nav-mobile {
   display: none;
+}
+
+/* Desktop Style */
+@media only screen and (min-width: 501px) {
+  #mobile-nav {
+    display: none;
+  }
 }
 
 /* mobile style*/

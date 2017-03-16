@@ -245,7 +245,7 @@ export default {
   @include transform(translateY(-50%));
 }
 #playlist {
-  padding-top: 62px;
+  padding-top: 56px;
 
   #playlist-view {
     margin: 0 auto;

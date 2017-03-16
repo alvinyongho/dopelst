@@ -70,6 +70,14 @@ Our application utilizes a service worker to enable the application to be used o
 
 Our application has a web app manifest located at /static/manifest.json. In conjunction with having a Service Worker, this allows a user to install the application onto their device, giving them a native app experience.
 
-## Todo
+## Concerns/Limitations/Todo
+
+- Users that do not have JavaScript would not see anything upon visiting the website. Unfortunately, this is not something we can resolve given our choice to use Vue.js to render views in the absence of an option to do server-side rendering.
+- Users that do not have the JavaScript FileReader API would encounter difficulty when they try to add playlists because the image handler methods utilize the API. However, given the [relative ubiquity](http://caniuse.com/#feat=filereader) of the API, we decided to accept this as a tradeoff as including a shim would have added significant application bloat that most users would not utilize.
 
 ## Credit
+
+#### Development Team
+[Alvin Ho](https://github.com/alvinyongho)
+[Lauren Liu](https://github.com/lmliu)
+[David Luu](https://github.com/davidcluu) - [Website](https://davidluu.me/)
