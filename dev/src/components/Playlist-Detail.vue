@@ -349,7 +349,8 @@ $song-chart-height-margin: 10%;
 
 @media screen and (min-width:1056px){
   #playlist-banner-text{
-    margin-top: 25vh;
+    // margin-top: 25vh;
+    margin-top: 100px;
   }
 }
 
