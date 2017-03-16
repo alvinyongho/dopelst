@@ -49,6 +49,7 @@
 
 <script>
 import PlaylistModal from './elements/PlaylistModal';
+import ImageTools from './helpers/ImageTools';
 
 export default {
   name: 'playlists',
@@ -182,9 +183,8 @@ export default {
     uploadImage(cb) {
       this.uploadingImage = false; // true;
 
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        this.playlistImagesRef.push(reader.result).then(
+      const pushImage = (img) => {
+        this.playlistImagesRef.push(img).then(
           (snapshot) => {
             this.playlist.imageRef = snapshot.key;
 
@@ -197,8 +197,20 @@ export default {
             this.uploadingImage = false;
           },
         );
+      };
+
+      ImageTools.resize(this.currentImage, {
+        width: 250,
+        height: 250,
+      }, (res, success) => {
+        if (success) {
+          pushImage(res);
+        } else {
+          const reader = new FileReader();
+          reader.addEventListener('load', () => pushImage(reader.result));
+          reader.readAsDataURL(this.currentImage);
+        }
       });
-      reader.readAsDataURL(this.currentImage);
     },
     showCreateModal() {
       this.createModalVisible = true;
