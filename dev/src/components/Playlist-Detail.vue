@@ -203,7 +203,7 @@ $side-margin-size: 12%;
 $song-chart-height-margin: 10%;
 
 #playlist {
-
+  position: relative;
 
   #playlist-banner {
     position: relative;
@@ -393,6 +393,8 @@ $song-chart-height-margin: 10%;
 
 #playlist {
   background-color: $playlist-background-color;
+  position: fixed;
+  top: 0;
 
   height: 100%;
   width: 100%;

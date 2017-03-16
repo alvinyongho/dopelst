@@ -1,10 +1,10 @@
 <template>
   <div class="team-body">
-    <div class="quickbar">
+    <!--<div class="quickbar">
       <a href="#lauren">Lauren</a>
       <a href="#alvin">Alvin</a>
-      <a href="#david">David</a>
-    </div>
+      <a href="david">David</a>
+    </div>-->
 
     <div class="team-members">
 
@@ -138,5 +138,6 @@ export default {
     padding: 5px;
   }
 }
+
 
 </style>
