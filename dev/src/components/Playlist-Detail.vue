@@ -21,6 +21,7 @@
     <SongModal name="Create Song"
     v-bind:song="song"
     v-bind:modalVisible="createModalVisible"
+    v-bind:modalError="modalError"
 
     v-bind:closeModal="closeModal"
     v-bind:songAction="createSong"
@@ -29,6 +30,7 @@
     <SongModal name="Edit Song"
     v-bind:song="song"
     v-bind:modalVisible="editModalVisible"
+    v-bind:modalError="modalError"
 
     v-bind:closeModal="closeModal"
     v-bind:songAction="editSong"
@@ -117,6 +119,7 @@ export default {
       },
       createModalVisible: false,
       editModalVisible: false,
+      modalError: '',
     };
   },
   mounted() {
@@ -146,6 +149,8 @@ export default {
         this.song.playlist = this.song.playlist;
         this.closeModal();
         // this.song.playlist = '';
+      } else {
+        this.modalError = 'Song must have a name, artist, and link!';
       }
     },
     editSong() {
@@ -166,6 +171,8 @@ export default {
             console.error(err);
           },
         );
+      } else {
+        this.modalError = 'Song must have a name, artist, and link!';
       }
     },
     showEditModal(song) {

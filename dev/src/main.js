@@ -47,7 +47,7 @@ new Vue({
  * Service Worker
  */
 
-const swEnabled = true;
+const swEnabled = false;
 
 if (
   // Enable toggle

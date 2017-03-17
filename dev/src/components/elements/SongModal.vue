@@ -13,7 +13,7 @@
               <div class="modal-btn">
                 <input type="submit" id="modal-submit-btn" v-on:submit.prevent="songAction" v-bind:value="name" />
               </div>
-
+              <div class="modal-error" v-show="modalError">Error: {{modalError}}</div><!-- .modal-error -->
             </form>
             <button class="modal-cancel" v-bind:id="rootId + '-modal-cancel'" v-on:click="closeModal">CANCEL</button>
           </div><!-- .modal-body -->
@@ -31,6 +31,7 @@ export default {
 
     'song',
     'modalVisible',
+    'modalError',
 
     'closeModal',
     'songAction',
@@ -65,6 +66,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.modal-error {
+  color: red;
+}
+
 .modal .progress-container {
   position: relative;
 
