@@ -8,14 +8,14 @@
             <form class="modal-form" v-bind:id="rootId + '-modal-form'" v-on:submit.prevent="songAction">
               <input class="modal-autofocus" v-bind:id="rootId + '-modal-autofocus'" v-model="song.name" type="text" name="name" placeholder="Song Name" />
               <input type="text" v-model="song.artist" name="artist" placeholder="Song Artist" />
-              <input type="text" v-model="song.link" name="link" placeholder="Song Link" />
+              <!--<input type="text" v-model="song.link" name="link" placeholder="Song Link" />-->
 
-              <div>
-                <input type="submit" v-on:submit.prevent="songAction" v-bind:value="name" />
+              <div class="modal-btn">
+                <input type="submit" id="modal-submit-btn" v-on:submit.prevent="songAction" v-bind:value="name" />
               </div>
 
             </form>
-            <button class="modal-cancel" v-bind:id="rootId + '-modal-cancel'" v-on:click="closeModal">Cancel</button>
+            <button class="modal-cancel" v-bind:id="rootId + '-modal-cancel'" v-on:click="closeModal">CANCEL</button>
           </div><!-- .modal-body -->
         </div><!-- .modal-container -->
       </div><!-- .modal-wrapper -->
@@ -262,5 +262,17 @@ export default {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+#modal-submit-btn {
+  background-color: #000;
+  color: #fff;
+}
+
+.modal-cancel {
+  background-color: #721212;
+  border: none;
+  color: #fff;
+  padding: 5px;
 }
 </style>

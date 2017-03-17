@@ -199,6 +199,9 @@ export default {
 $banner-gradient-1st-color: #0e0a0a;
 $banner-gradient-2nd-color: #6C237C;
 
+
+$banner-height-desktop: 350px;
+
 $side-margin-size: 12%;
 $song-chart-height-margin: 10%;
 
@@ -207,15 +210,10 @@ $song-chart-height-margin: 10%;
 
   #playlist-banner {
     position: relative;
-    height: 350px;
+    height: $banner-height-desktop;
     width: 100%;
     /* Banner gradient properties*/
-    background: $banner-gradient-1st-color;
-    background: -webkit-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
-    background: -moz-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
-    background: -ms-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
-    background: -o-linear-gradient(left, $banner-gradient-1st-color, $banner-gradient-2nd-color);
-    background: linear-gradient(to right, $banner-gradient-1st-color, $banner-gradient-2nd-color);
+    background: #161616;
 
 
 
@@ -233,7 +231,7 @@ $song-chart-height-margin: 10%;
 
       h1 {
         padding-top: 0px;
-        font-family: 'Muli', sans-serif;
+        font-family: 'Avenir', Helvetica, sans-serif;
         color: #fff;
         font-size: 1.75em;
         width: 100%;
@@ -244,12 +242,14 @@ $song-chart-height-margin: 10%;
         font-family: 'Muli', sans-serif;
         color: #cdcdcd;
         font-size: 1em;
+        word-wrap: break-word;
       }
 
       p {
         font-family: 'Muli', sans-serif;
         color: #cdcdcd;
         font-size: 0.75em;
+        word-wrap: break-word;
       }
     }
     #playlist-album-img {
@@ -298,7 +298,7 @@ $song-chart-height-margin: 10%;
         #add-song{
             font-size: .75em;
             float: right;
-            font-family: "Montserrat", Helvetica, sans-serif;
+            font-family: 'Avenir', 'Montserrat', Helvetica, sans-serif;
             padding-right: 2em;
 
             &:hover {
@@ -347,15 +347,19 @@ $song-chart-height-margin: 10%;
 }
 
 
+/* centers playlist text*/
 @media screen and (min-width:1056px){
   #playlist-banner-text{
-    // margin-top: 25vh;
     margin-top: 100px;
   }
 }
 
 /* view for ipad*/
 @media screen and (max-width: 1056px) {
+
+  #playlist-banner-text {
+    min-width: 30%;
+  }
 
   #playlist #playlist-banner #playlist-album-img {
     height: 250px;
@@ -400,7 +404,6 @@ $song-chart-height-margin: 10%;
   height: 100%;
   width: 100%;
   #playlist-banner {
-    position: relative;
     height: $banner-height;
     width: 100%;
     background: none; /*take out later*/
@@ -427,17 +430,13 @@ $song-chart-height-margin: 10%;
       }
 
       h1 {
-        padding-top: 0px;
         margin-top: 0px;
-        font-family: 'Muli', sans-serif;
         color: #fff;
         font-size: 1em;
-        width: 100%;
         word-wrap: break-word;
       }
 
       h4 {
-        font-family: 'Muli', sans-serif;
         color: $banner-deets-color;
         font-size: 0.80em;
         width: 100%;
@@ -445,13 +444,10 @@ $song-chart-height-margin: 10%;
       }
 
       p {
-        font-family: 'Muli', sans-serif;
         color: $banner-deets-color;
-        font-size: 0.75em;
       }
     }
     #playlist-album-img {
-      display: inline-block;
       height: $album-img-dimension;
       width: $album-img-dimension;
       position: absolute;
@@ -479,10 +475,8 @@ $song-chart-height-margin: 10%;
   #songs-chart {
     background-color: black;
 
-    /** ADD */
     padding-top: $song-chart-height-margin/2;
     margin-top: 0;
-
     margin-bottom: 0;
     margin-left:  $side-margin-song-m;
     margin-right: $side-margin-song-m;
@@ -492,23 +486,10 @@ $song-chart-height-margin: 10%;
     color: $song-chart-font-color;
 
     table{
-      font-family: 'Muli', sans-serif;
-      width: 100%;
-      padding: 80px;
-      border-collapse: collapse;
 
       thead{
         border-bottom: 1px solid rgba(255,255,255,0.1);
-        #add-song{
-            font-size: .75em;
-            float: right;
-            font-family: "Montserrat", Helvetica, sans-serif;
-            padding-right: 2em;
 
-            &:hover {
-              color: #636363;
-            }
-        }
       }
       th{
         border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -516,7 +497,7 @@ $song-chart-height-margin: 10%;
         color: rgba(255,255,255,0.5);
 
       }
-      /*ADDED*/
+
       th#chart-title {
         font-weight: 300; 
       }
@@ -529,8 +510,8 @@ $song-chart-height-margin: 10%;
       }
 
       tr td{
-        border-bottom: 1px solid rgba(175, 175, 175,0.1);
-        padding: 15px;
+        border-color: rgba(175, 175, 175,0.1);
+
         .songs-buttons {
           float: right;
           .song-btn {
@@ -539,20 +520,27 @@ $song-chart-height-margin: 10%;
               height: 16px;
             }
           }
+
+          /* mobile toggle for colored icons*/
           #sb-m {
             display: inline-block;
             opacity: 0.75;
           }
+
+          /* desktop toggle for colored icons */
           #sb-d {
             display: none;
           }
         }
+
+        /* Title of song in song chart */
         #song-list-title {
             text-decoration: none;
             color: #fff;
             font-weight: bold;
         }
 
+        /* Song text for mobile*/
         #song-details-mobile {
           display: block;
 
@@ -563,6 +551,7 @@ $song-chart-height-margin: 10%;
           }
         }
 
+        /* song details toggle */
         #song-details-desktop {
           display: none;
         }
