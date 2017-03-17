@@ -22,23 +22,23 @@ The application allows users to log in using either an app-specific login (email
 
 ![Create Screenshot](/readme-images/create-playlist.png?raw=true "Create Screenshot") ![Create Screenshot](/readme-images/create-song.png?raw=true "Create Screenshot")
 
-Users can create Playlists, which have playlist name, playlist description, and playlist image properties, by clicking on the "ADD PLAYLIST" text on the playlist view. Clicking the icon brings up a form that allows the user to set the properties of their new playlist.
+Users can create Playlists, which have playlist name, playlist description, and playlist image properties, by clicking on the "ADD PLAYLIST" text on the playlist view. Clicking the icon brings up a form that allows the user to set the properties of their new playlist. In a similar fashion, when the user is viewing a specific playlist, they have the option to add a song by clicking on the "ADD SONG" text.
 
 ### (R)ead
 
 ![Read Screenshot](/readme-images/read-playlist.png?raw=true "Read Screenshot") ![Read Screenshot](/readme-images/read-song.png?raw=true "Read Screenshot")
 
-Users can see their Playlists on their home page when they are logged in (/playlist).
+Users can see their Playlists on their home page when they are logged in. Users can see the songs on their playlists by navigating to a playlist view.
 
 ### (U)pdate
 
 ![Update Screenshot](/readme-images/update-playlist.png?raw=true "Update Screenshot") ![Update Screenshot](/readme-images/update-song.png?raw=true "Update Screenshot")
 
-Users can edit all the properties of their Playlists by cicking the edit icon underneath the playlist they want to change. Clicking the icon brings up a similar flow to creating a playlist, except it updates the playlist instead of creating a new one.
+Users can edit all the properties of their Playlists by cicking the edit icon underneath the playlist they want to change. Clicking the icon brings up a similar flow to creating a playlist, except it updates the playlist instead of creating a new one. In a similar fashion, users can also click the edit icon to the right of the song they want to change in order to change it.
 
 ### (D)elete
 
-Users can delete their Playlists by clicking the delete icon under the playlist they want to delete.
+Users can delete their Playlists by clicking the delete icon under the playlist they want to delete. Users can also delete songs that are in playlists by pressing the delete icon to the right of the song.
 
 ### Asset Management
 
