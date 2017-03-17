@@ -59,7 +59,7 @@ export default {
     display: inline-block;
     cursor: pointer;
 
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 0.9em;
   }
