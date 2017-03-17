@@ -10,8 +10,8 @@
           <img v-bind:id="'playlist-img-' + i" class="playlist-img" v-bind:alt="playlist.name" v-on:click="openPlaylist(playlist)" />
           <a class="playlist-name" v-on:click="openPlaylist(playlist)">{{playlist.name}}</a>
 
-          <button v-on:click="removePlaylist(playlist)">Delete</button>
-          <button v-on:click.prevent="showEditModal(playlist)">Edit</button>
+          <button v-on:click="removePlaylist(playlist)"><img src="../assets/delete.png" alt="Delete" /></button>
+          <button v-on:click.prevent="showEditModal(playlist)"><img src="../assets/edit.png" alt="Edit" /></button>
         </div><!-- .playlist-element -->
       </div><!-- #playlist-grid -->
     </section><!-- #playlist-view -->
@@ -282,6 +282,8 @@ export default {
     margin: 5px 20px 40px;
     width: 160px;
 
+    vertical-align: top;
+
     display: inline-block;
 
     .playlist-img {
@@ -304,6 +306,16 @@ export default {
 
     .playlist-name:hover {
       color: #7c7c7c;
+    }
+
+    button {
+      border: none;
+      background: none;
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }

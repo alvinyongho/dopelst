@@ -42,7 +42,7 @@ Users can delete their Playlists by clicking the delete icon under the playlist 
 
 ### Asset Management
 
-We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features).
+We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features). In order to reduce the space needed to stored images, we 
 
 
 ## Code Organization/Architecture
