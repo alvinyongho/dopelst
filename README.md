@@ -68,7 +68,7 @@ Our application utilizes a service worker to enable the application to be used o
 
 ### Web Manifest
 
-Our application has a web app manifest located at /static/manifest.json. In conjunction with having a Service Worker, this allows a user to install the application onto their device, giving them a native app experience.
+Our application has a web app manifest located at [/static/manifest.json](https://dopelst-a697d.firebaseapp.com/static/manifest.json). In conjunction with having a Service Worker, this allows a user to install the application onto their device, giving them a native app experience.
 
 ## Concerns/Limitations/Todo
 

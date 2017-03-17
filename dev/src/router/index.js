@@ -85,7 +85,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!firebase.auth().currentUser && to.path !== '/' && to.path !== '/login') {
+  if (!firebase.auth().currentUser && to.path !== '/' && to.path !== '/login' && to.path !== '/faq' && to.path !== '/team') {
     next('/login');
   } else if (firebase.auth().currentUser && to.path === '/') {
     next('/playlist');

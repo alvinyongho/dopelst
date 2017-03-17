@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <nav id ="nav-desk" >
-      <router-link to="/" v-show="!isLogin">
+      <router-link to="/">
         <img src="./assets/dopLstlogo.png" alt="LOGO" id ="nav-logo" />
       </router-link>
       <div class="spacer">&nbsp;</div>
-      <div class="nav-link" v-show="!isLogin" v-on:click="logoutUser">LOGOUT</div>
+      <div class="nav-link" v-show="isUser" v-on:click="logoutUser">LOGOUT</div>
       <router-link to="/faq" class="nav-link" v-show="!isLogin">FAQ</router-link>
       <router-link to="/team" class="nav-link" v-show="!isLogin">TEAM</router-link>
     </nav>
@@ -44,6 +44,9 @@ export default {
   data() {
     return {
       isLogin: false,
+      isIndex: false,
+      isInfoPage: false,
+      isUser: false,
       navWidth: 0,
       mNavDisp: 'none',
     };
@@ -58,6 +61,9 @@ export default {
     },
     syncRoute(route) {
       this.isLogin = (route.path === '/login');
+      this.isIndex = (route.path === '/');
+      this.isInfoPage = (route.path === '/faq' || route.path === '/team');
+      this.isUser = firebase.auth().currentUser;
       document.title = (route.meta.title && route.meta.title(route.params)) || 'dopelst';
     },
     openNav() {
