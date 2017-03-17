@@ -2,8 +2,10 @@
   <div id="playlist">
     <div id="playlist-banner">
       <div class="songs-content" id="playlist-banner-text">
-        <h1>{{playlist[0].name}}</h1>
-        <h4>{{playlist[0].description}}</h4>
+        <div v-for="(pl, i) in playlist" v-if="i === 0">
+          <h1>{{pl.name}}</h1>
+          <h4>{{pl.description}}</h4>
+        </div>
         <p>Playlist · {{songs.length}} Songs</p>
       </div><!-- .songs-content -->
       <div id="playlist-album-img">
