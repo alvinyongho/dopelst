@@ -42,7 +42,7 @@ Users can delete their Playlists by clicking the delete icon under the playlist 
 
 ### Asset Management
 
-We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features). In order to reduce the space needed to stored images, we 
+We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features). In order to reduce the space needed to store images and to speed up image rendering time for users, we added a small code snippet that handles image resizing to reduce the size of uploaded images to 250x250 (the max size needed by the application).
 
 
 ## Code Organization/Architecture
@@ -81,9 +81,7 @@ Our application has a web app manifest located at [/static/manifest.json](https:
 - Users that do not have JavaScript would not see anything upon visiting the website. Unfortunately, this is not something we can resolve given our choice to use Vue.js to render views in the absence of an option to do server-side rendering.
 - Users that do not have the JavaScript FileReader API would encounter difficulty when they try to add playlists because the image handler methods utilize the API. However, given the [relative ubiquity](http://caniuse.com/#feat=filereader) of the API, we decided to accept this as a tradeoff as including a shim would have added significant application bloat that most users would not utilize.
 
-## Credit
-
-#### Development Team
+## Team
 
 [Alvin Ho](https://github.com/alvinyongho)
 
