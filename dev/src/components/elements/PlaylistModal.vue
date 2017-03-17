@@ -13,7 +13,7 @@
                 <label for="file" v-on:click="clickFile">{{fileLabelText}}</label>
               </div>
               <div>
-                <input type="submit" v-on:submit.prevent="playlistAction" v-bind:value="name" />
+                <input type="submit" id="modal-submit-btn" v-on:submit.prevent="playlistAction" v-bind:value="name" />
               </div>
               <div class="modal-error" v-show="modalError">Error: {{modalError}}</div><!-- .modal-error -->
             </form>
@@ -121,8 +121,8 @@ export default {
 .modal-form input[type="file"] + label {
   margin: 0 auto;
   margin-bottom: 2em;
-  padding: 0.25em;
-  width: auto;
+  padding: 0.5em;
+  width: 90%;
 
   display: inline-block;
   cursor: pointer;
@@ -238,5 +238,21 @@ export default {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+.modal-fileinput {
+  width: 100%;
+}
+
+#modal-submit-btn {
+  background-color: #000;
+  color: #fff;
+}
+
+.modal-cancel {
+  background-color: #721212;
+  border: none;
+  color: #fff;
+  padding: 5px;
 }
 </style>

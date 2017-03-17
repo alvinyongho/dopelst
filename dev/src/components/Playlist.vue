@@ -3,7 +3,7 @@
     <section id="playlist-view">
       <div id="header">
         <h1>Playlists</h1>
-        <a v-on:click="showCreateModal()">ADD PLAYLIST</a>
+        <a v-on:click="showCreateModal()">+</a>
       </div><!-- #header -->
       <div id="playlist-grid">
         <div class="playlist-element" v-for="(playlist, i) in userPlaylists">
@@ -261,16 +261,24 @@ export default {
 
         display: inline-block;
 
+        font-family: 'Avenir', Helvetica, sans-serif;
+
         font-size: 2em;
       }
 
       a {
           margin: 0;
-
           float: right;
+          font-size: 1.75em;
 
-          font-size: 0.75em;
+          padding-right: 5%;
+
+
+          &:hover {
+            color: #76157c;
+          }
       }
+
     }
   }
 }
@@ -279,7 +287,7 @@ export default {
   text-align: center;
 
   .playlist-element {
-    margin: 5px 20px 40px;
+    margin: 5px 20px 10px;
     width: 160px;
 
     vertical-align: top;
@@ -317,6 +325,25 @@ export default {
         height: 16px;
       }
     }
+
+    a {
+      font-family: 'Avenir', Helvetica, sans-serif;
+    }
+    button {
+      visibility: hidden;
+    }
+
+    &:hover {
+      button {
+        visibility: initial;
+         opacity: 0.5;
+
+         &:hover {
+            opacity: 1;
+         }
+      }
+      
+    }
   }
 }
 
@@ -324,11 +351,19 @@ export default {
   #playlist-view {
     width: 60%;
   }
+
 }
 
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
   #playlist-view {
     width: 90%;
   }
+
+  #playlist-grid .playlist-element button {
+    visibility: visible;
+    opacity: 0.5;
+  }
+
+
 }
 </style>
