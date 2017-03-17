@@ -33,13 +33,13 @@ export default {
   position: relative;
 
   background-color:#F8CF39;
-  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#F8CF39, endColorstr=#F76B1C);
-  background-image:-moz-linear-gradient(right bottom, #F8CF39 0%, #F76B1C 48%,#5E007A 100%);
-  background-image:linear-gradient(right bottom, #F8CF39 0%, #F76B1C 48%,#5E007A 100%);
-  background-image:-webkit-linear-gradient(right bottom, #F8CF39 0%, #F76B1C 48%,#5E007A 100%);
-  background-image:-o-linear-gradient(right bottom, #F8CF39 0%, #F76B1C 48%,#5E007A 100%);
-  background-image:-ms-linear-gradient(right bottom, #F8CF39 0%, #F76B1C 48%,#5E007A 100%);
-  background-image:-webkit-gradient(linear, right bottom, left top, color-stop(0%,#F8CF39), color-stop(48%,#F76B1C),color-stop(100%,#5E007A));
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#F8CF39, endColorstr=#f08042);
+  background-image:-moz-linear-gradient(right bottom, #F8CF39 0%, #f08042 48%,#5E007A 100%);
+  background-image:linear-gradient(right bottom, #F8CF39 0%, #f08042 48%,#5E007A 100%);
+  background-image:-webkit-linear-gradient(right bottom, #F8CF39 0%, #f08042 48%,#5E007A 100%);
+  background-image:-o-linear-gradient(right bottom, #F8CF39 0%, #f08042 48%,#5E007A 100%);
+  background-image:-ms-linear-gradient(right bottom, #F8CF39 0%, #f08042 48%,#5E007A 100%);
+  background-image:-webkit-gradient(linear, right bottom, left top, color-stop(0%,#F8CF39), color-stop(48%,#f08042),color-stop(100%,#5E007A));
 
   text-align: center;
 
