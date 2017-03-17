@@ -137,8 +137,7 @@ export default {
   methods: {
     createSong() {
       if (this.song.name.trim() &&
-          this.song.artist.trim() &&
-          this.song.link.trim()) {
+          this.song.artist.trim()) {
         songsRef.push(this.song);
         this.song.name = '';
         this.song.artist = '';
@@ -562,6 +561,10 @@ $song-chart-height-margin: 10%;
     }
   }
 }
+}
+
+#playlist #songs-chart table tr td#no-song {
+  border-bottom: none;
 }
 
 

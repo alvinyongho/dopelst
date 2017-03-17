@@ -8,7 +8,7 @@
             <form class="modal-form" v-bind:id="rootId + '-modal-form'" v-on:submit.prevent="songAction">
               <input class="modal-autofocus" v-bind:id="rootId + '-modal-autofocus'" v-model="song.name" type="text" name="name" placeholder="Song Name" />
               <input type="text" v-model="song.artist" name="artist" placeholder="Song Artist" />
-              <input type="text" v-model="song.link" name="link" placeholder="Song Link" />
+              <!--<input type="text" v-model="song.link" name="link" placeholder="Song Link" />-->
 
               <div class="modal-btn">
                 <input type="submit" id="modal-submit-btn" v-on:submit.prevent="songAction" v-bind:value="name" />
