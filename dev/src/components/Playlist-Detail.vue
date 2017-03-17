@@ -2,9 +2,9 @@
   <div id="playlist">
     <div id="playlist-banner">
       <div class="songs-content" id="playlist-banner-text">
-        <div v-for="(list, i) in playlist" v-if="i === 0"><!-- list = playlist[0] -->
-          <h1>{{list.name}}</h1>
-          <h4>{{list.description}}</h4>
+        <div v-for="(pl, i) in playlist" v-if="i === 0">
+          <h1>{{pl.name}}</h1>
+          <h4>{{pl.description}}</h4>
         </div>
         <p>Playlist · {{songs.length}} Songs</p>
       </div><!-- .songs-content -->
@@ -34,14 +34,20 @@
     v-bind:songAction="editSong"
     />
 
+
+
     <!-- end #create-song -->
     <div id="songs-chart">
       <table>
         <thead>
-          <th id="chart-title">SONGS</th>
-          <th id="chart-add-desktop"><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
+          <th>SONGS</th>
+          <th><a id="add-song" v-on:click="showCreateModal()">ADD SONG</a></th>
           <!-- use the modal component, pass in the prop -->
         </thead>
+
+        <tr v-if="songs.length <= 0">
+          <td id="no-song">No songs to display, add one to get started</td>
+        </tr>
 
 
         <tr v-for="song in songs">
@@ -82,7 +88,13 @@
 
 
 <script>
+import firebase from 'firebase';
 import SongModal from './elements/SongModal';
+
+const db = firebase.database();
+const playlistsRef = db.ref('playlists');
+const songsRef = db.ref('songs');
+const playlistImagesRef = db.ref('playlistImages');
 
 // const playlistSingle = playlistsRef.orderByKey().equalTo(this.$route.params.id);
 
@@ -91,21 +103,12 @@ export default {
   components: { SongModal },
   firebase() {
     return {
-      playlist: this.playlistsRef.orderByKey().equalTo(this.$route.params.id),
-      songs: this.songsRef.orderByChild('playlist').equalTo(this.$route.params.id),
+      playlist: playlistsRef.orderByKey().equalTo(this.$route.params.id),
+      songs: songsRef.orderByChild('playlist').equalTo(this.$route.params.id),
     };
   },
   data() {
-    const firebase = this.$root.$data.firebase;
-    const firebaseApp = this.$root.$data.firebaseApp;
-    const db = firebaseApp.database();
-
     return {
-      firebase,
-      firebaseApp,
-      playlistsRef: db.ref('playlists'),
-      songsRef: db.ref('songs'),
-      playlistImagesRef: db.ref('playlistImages'),
       song: {
         name: '',
         artist: '',
@@ -117,14 +120,14 @@ export default {
     };
   },
   mounted() {
-    this.playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
+    playlistsRef.orderByKey().equalTo(this.$route.params.id).on('value', (snapshot) => {
       const vals = snapshot.val();
       if (vals) {
         const valArray = Object.keys(vals).map(key => vals[key]);
 
         this.$nextTick(() => {
           const img = document.getElementById('playlist-img');
-          this.playlistImagesRef.child(valArray[0].imageRef).on('value', (playlistImageSnapshot) => {
+          playlistImagesRef.child(valArray[0].imageRef).on('value', (playlistImageSnapshot) => {
             img.src = playlistImageSnapshot.val();
           });
         });
@@ -136,7 +139,7 @@ export default {
       if (this.song.name.trim() &&
           this.song.artist.trim() &&
           this.song.link.trim()) {
-        this.songsRef.push(this.song);
+        songsRef.push(this.song);
         this.song.name = '';
         this.song.artist = '';
         this.song.link = '';
@@ -149,7 +152,7 @@ export default {
       if (this.song.name.trim() && this.song.artist.trim()) {
         const key = this.song['.key'];
 
-        this.songsRef.child(key).update({
+        songsRef.child(key).update({
           name: this.song.name,
           artist: this.song.artist,
           link: this.song.link,
@@ -173,7 +176,7 @@ export default {
       this.createModalVisible = true;
     },
     removeSong(song) {
-      this.songsRef.child(song['.key']).remove();
+      songsRef.child(song['.key']).remove();
     },
     closeModal() {
       this.createModalVisible = false;
@@ -194,7 +197,6 @@ export default {
 };
 
 </script>
-
 <style scoped lang="scss">
 $banner-gradient-1st-color: #0e0a0a;
 $banner-gradient-2nd-color: #6C237C;

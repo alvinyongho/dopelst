@@ -20,23 +20,29 @@ The application allows users to log in using either an app-specific login (email
 
 ### (C)reate
 
-Users can create Playlists, which have playlist name, playlist description, and playlist image properties, by clicking on the "ADD PLAYLIST" text on the playlist view. Clicking the icon brings up a form that allows the user to set the properties of their new playlist.
+![Create Screenshot](/readme-images/create-playlist.png?raw=true "Create Screenshot") ![Create Screenshot](/readme-images/create-song.png?raw=true "Create Screenshot")
+
+Users can create Playlists, which have playlist name, playlist description, and playlist image properties, by clicking on the "ADD PLAYLIST" text on the playlist view. Clicking the icon brings up a form that allows the user to set the properties of their new playlist. In a similar fashion, when the user is viewing a specific playlist, they have the option to add a song by clicking on the "ADD SONG" text.
 
 ### (R)ead
 
-Users can see their Playlists on their home page when they are logged in (/playlist).
+![Read Screenshot](/readme-images/read-playlist.png?raw=true "Read Screenshot") ![Read Screenshot](/readme-images/read-song.png?raw=true "Read Screenshot")
+
+Users can see their Playlists on their home page when they are logged in. Users can see the songs on their playlists by navigating to a playlist view.
 
 ### (U)pdate
 
-Users can edit all the properties of their Playlists by cicking the edit icon underneath the playlist they want to change. Clicking the icon brings up a similar flow to creating a playlist, except it updates the playlist instead of creating a new one.
+![Update Screenshot](/readme-images/update-playlist.png?raw=true "Update Screenshot") ![Update Screenshot](/readme-images/update-song.png?raw=true "Update Screenshot")
+
+Users can edit all the properties of their Playlists by cicking the edit icon underneath the playlist they want to change. Clicking the icon brings up a similar flow to creating a playlist, except it updates the playlist instead of creating a new one. In a similar fashion, users can also click the edit icon to the right of the song they want to change in order to change it.
 
 ### (D)elete
 
-Users can delete their Playlists by clicking the delete icon under the playlist they want to delete.
+Users can delete their Playlists by clicking the delete icon under the playlist they want to delete. Users can also delete songs that are in playlists by pressing the delete icon to the right of the song.
 
 ### Asset Management
 
-We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features).
+We originally planned on using Firebase Storage to store images. However, as our project development advanced into the PWA stage, we quickly realized that Firebase Storage does not have an offline mode of operation. At that stage, we had two options - to alter Firebase Storage's CORS settings (which we found could be done, but since the method is very well hidden within layers of documentation, is likely not a well supported method) or to store the images as data URLs in in Firebase Database. We ultimately went with the second option because it was more compatible with the features that we were already using (namely Firebase Database's offline features). In order to reduce the space needed to store images and to speed up image rendering time for users, we added a small code snippet that handles image resizing to reduce the size of uploaded images to 250x250 (the max size needed by the application).
 
 
 ## Code Organization/Architecture
@@ -75,9 +81,7 @@ Our application has a web app manifest located at [/static/manifest.json](https:
 - Users that do not have JavaScript would not see anything upon visiting the website. Unfortunately, this is not something we can resolve given our choice to use Vue.js to render views in the absence of an option to do server-side rendering.
 - Users that do not have the JavaScript FileReader API would encounter difficulty when they try to add playlists because the image handler methods utilize the API. However, given the [relative ubiquity](http://caniuse.com/#feat=filereader) of the API, we decided to accept this as a tradeoff as including a shim would have added significant application bloat that most users would not utilize.
 
-## Credit
-
-#### Development Team
+## Team
 
 [Alvin Ho](https://github.com/alvinyongho)
 
