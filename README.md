@@ -20,19 +20,19 @@ The application allows users to log in using either an app-specific login (email
 
 ### (C)reate
 
-![Create Screenshot](/readme-images/create.png?raw=true "Create Screenshot")
+![Create Screenshot](/readme-images/create-playlist.png?raw=true "Create Screenshot") ![Create Screenshot](/readme-images/create-song.png?raw=true "Create Screenshot")
 
 Users can create Playlists, which have playlist name, playlist description, and playlist image properties, by clicking on the "ADD PLAYLIST" text on the playlist view. Clicking the icon brings up a form that allows the user to set the properties of their new playlist.
 
 ### (R)ead
 
-![Read Screenshot](/readme-images/read.png?raw=true "Read Screenshot")
+![Read Screenshot](/readme-images/read-playlist.png?raw=true "Read Screenshot") ![Read Screenshot](/readme-images/read-song.png?raw=true "Read Screenshot")
 
 Users can see their Playlists on their home page when they are logged in (/playlist).
 
 ### (U)pdate
 
-![Update Screenshot](/readme-images/update.png?raw=true "Update Screenshot")
+![Update Screenshot](/readme-images/update-playlist.png?raw=true "Update Screenshot") ![Update Screenshot](/readme-images/update-song.png?raw=true "Update Screenshot")
 
 Users can edit all the properties of their Playlists by cicking the edit icon underneath the playlist they want to change. Clicking the icon brings up a similar flow to creating a playlist, except it updates the playlist instead of creating a new one.
 
