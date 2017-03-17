@@ -55,7 +55,7 @@
           <td>
             <span class ="songs-list-details" id="song-details-desktop"><a v-bind:href="song.link" id="song-list-title">{{song.name}} </a> · {{song.artist}}</span>
             <span class ="songs-list-details" id="song-details-mobile">
-              <a href="/song-details.html" id="song-list-title">{{song.name}} </a> 
+              <a href="/song-details.html" id="song-list-title">{{song.name}} </a>
               <br>
              <span id="song-list-artist">{{song.artist}}</span>
             </span>
@@ -137,7 +137,8 @@ export default {
   methods: {
     createSong() {
       if (this.song.name.trim() &&
-          this.song.artist.trim()) {
+          this.song.artist.trim() &&
+          this.song.link.trim()) {
         songsRef.push(this.song);
         this.song.name = '';
         this.song.artist = '';
@@ -500,7 +501,7 @@ $song-chart-height-margin: 10%;
       }
 
       th#chart-title {
-        font-weight: 300; 
+        font-weight: 300;
       }
 
       th, td {
@@ -566,10 +567,6 @@ $song-chart-height-margin: 10%;
 #playlist #songs-chart table tr td#no-song {
   border-bottom: none;
 }
-
-
-
-
 
 
 
