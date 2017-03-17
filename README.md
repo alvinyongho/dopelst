@@ -10,6 +10,7 @@
 - Frontend: HTML / CSS (Vanilla + SCSS) / JS (Vue.js + vue-router)
 - Services Used: Firebase Hosting / Firebase Database
 - Build Tools: Webpack
+- [Lighthouse Score: >95/100](https://github.com/alvinyongho/dopelst/tree/master/lighthouse) (Depends on the weather)
 
 
 ## Application Features

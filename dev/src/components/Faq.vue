@@ -2,22 +2,27 @@
   <div class="faq">
 		<section id="faq">
 			<h2>FAQ</h2>
-			<div class="question">
-				<h3>This is a sample question</h3>
-				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
-			</div><!-- .question -->
-			<div class="question">
-				<h3>This is a sample question</h3>
-				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
-			</div><!-- .question -->
-				<div class="question">
-				<h3>This is a sample question</h3>
-				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
-			</div><!-- .question -->
-				<div class="question">
-				<h3>This is a sample question</h3>
-				<p>Lorem Khaled Ipsum is a major key to success. We don’t see them, we will never see them. Give thanks to the most high. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. The key to more success is to have a lot of pillows. In life there will be road blocks but we will over come it. They don’t want us to eat. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! Life is what you make it, so let’s make it.</p>
-			</div><!-- .question -->
+      <div class="question">
+        <h3>How do I add a playlist?</h3>
+        <p>You can add a playlist on the Home page by clicking the “+” button that’s located near the header. Each playlist requires an image, a title, and a description.</p>
+      </div><!-- .question -->
+      <div class="question">
+        <h3>How do I edit a playlist?</h3>
+        <p>You can edit a playlist by hovering over the playlist in the Home page and clicking the pencil icon. On mobile, the edit button is available by default.
+        </p>
+      </div><!-- .question -->
+      <div class="question">
+        <h3>How do I delete a playlist?</h3>
+        <p>You can edit a playlist by hovering over the playlist in the Home page and clicking the trash bin icon. On mobile, the delete button is available by default. </p>
+      </div><!-- .question -->
+      <div class="question">
+        <h3>How do I add a song to a playlist?</h3>
+        <p>You can add songs to a specific song to a playlist by clicking on one of your previously created playlists, and selected “ADD SONG” which is located on the upper right-hand side of the song table.</p>
+      </div><!-- .question -->
+      <div class="question">
+        <h3>How do I edit/delete a song on a playlist?</h3>
+        <p>You can edit/delete songs on a playlist by clicking on the icons on the right hand side of each song.</p>
+      </div><!-- .question -->
 		</section><!-- #faq -->
 	</div><!--.faq-->
 </template>
